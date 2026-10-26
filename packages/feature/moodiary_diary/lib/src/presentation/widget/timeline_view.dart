@@ -30,6 +30,7 @@ class DiaryTimelineView extends ConsumerWidget {
       categoryId: filter.categoryId,
       uncategorized: filter.uncategorized,
       tag: filter.tag,
+      day: filter.day,
     );
     final diaryAsync = ref.watch(provider);
     final selection = ref.watch(diarySelectionProvider);

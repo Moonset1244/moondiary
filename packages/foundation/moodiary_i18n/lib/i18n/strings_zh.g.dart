@@ -624,6 +624,9 @@ class Translations$app$zh {
 
 	/// zh: '保存时把正文中的 #标签 移出正文、转为标签'
 	String get extractHashtagsSubtitle => '保存时把正文中的 #标签 移出正文、转为标签';
+
+	/// zh: '主页显示日历'
+	String get showHomeCalendar => '主页显示日历';
 }
 
 // Path: assistant
@@ -2120,6 +2123,15 @@ class Translations$diary$zh {
 
 	/// zh: '标签'
 	String get tagSection => '标签';
+
+	/// zh: '展开月历'
+	String get calendarExpand => '展开月历';
+
+	/// zh: '收起月历'
+	String get calendarCollapse => '收起月历';
+
+	/// zh: '选日期'
+	String get calendarPickDate => '选日期';
 }
 
 // Path: editor

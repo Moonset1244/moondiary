@@ -187,5 +187,6 @@
   "showMetaTags": "显示标签",
   "showMetaMood": "显示心情",
   "extractHashtags": "提取正文 #标签 为日记标签",
-  "extractHashtagsSubtitle": "保存时把正文中的 #标签 移出正文、转为标签"
+  "extractHashtagsSubtitle": "保存时把正文中的 #标签 移出正文、转为标签",
+  "showHomeCalendar": "主页显示日历"
 }

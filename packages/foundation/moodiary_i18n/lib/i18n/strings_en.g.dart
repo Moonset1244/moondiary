@@ -244,6 +244,7 @@ class _Translations$app$en extends Translations$app$zh {
 	@override String get showMetaMood => 'Show mood';
 	@override String get extractHashtags => 'Extract #hashtags as tags';
 	@override String get extractHashtagsSubtitle => 'On save, move #hashtags out of the body into tags';
+	@override String get showHomeCalendar => 'Show calendar on home';
 }
 
 // Path: assistant
@@ -763,6 +764,9 @@ class _Translations$diary$en extends Translations$diary$zh {
 	@override String get tagRename => 'Rename';
 	@override String get tagSetParent => 'Set parent';
 	@override String get tagSection => 'Tags';
+	@override String get calendarExpand => 'Expand month';
+	@override String get calendarCollapse => 'Collapse month';
+	@override String get calendarPickDate => 'Pick date';
 }
 
 // Path: editor

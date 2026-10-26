@@ -109,8 +109,7 @@ class _MobileRootShellState extends ConsumerState<MobileRootShell> {
           ),
           bottomNavigationBar: MNavBar(
             selectedIndex: tabs.indexOf(effectiveTab),
-            onDestinationSelected: (i) =>
-                setState(() => _tab = tabs[i]),
+            onDestinationSelected: (i) => setState(() => _tab = tabs[i]),
             destinations: _navDestinations(context, showAssistant),
             action: _navAction(context),
           ),

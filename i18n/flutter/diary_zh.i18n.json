@@ -188,5 +188,8 @@
   "tagNoParent": "（顶级）",
   "tagRename": "重命名",
   "tagSetParent": "设置父级",
-  "tagSection": "标签"
+  "tagSection": "标签",
+  "calendarExpand": "展开月历",
+  "calendarCollapse": "收起月历",
+  "calendarPickDate": "选日期"
 }

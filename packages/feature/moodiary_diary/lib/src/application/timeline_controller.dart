@@ -32,3 +32,28 @@ Future<Map<DateTime, int>> timelineMonthCounts(
     sort: sort,
   );
 }
+
+/// 按天统计（主页日历条）。
+@riverpod
+Future<Map<DateTime, int>> homeDayCounts(
+  Ref ref, {
+  String? categoryId,
+  bool uncategorized = false,
+  String? tag,
+}) async {
+  final repository = getIt<DiaryRepository>();
+  Timer? debounce;
+  final sub = repository.diaryEvents.listen((_) {
+    debounce?.cancel();
+    debounce = Timer(const Duration(milliseconds: 300), ref.invalidateSelf);
+  });
+  ref.onDispose(() {
+    debounce?.cancel();
+    sub.cancel();
+  });
+  return repository.diaryCountByDay(
+    categoryId: categoryId,
+    uncategorized: uncategorized,
+    tag: tag,
+  );
+}

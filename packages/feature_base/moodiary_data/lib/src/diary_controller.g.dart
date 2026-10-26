@@ -16,7 +16,12 @@ final class DiaryControllerProvider
     extends $AsyncNotifierProvider<DiaryController, List<Diary>> {
   DiaryControllerProvider._({
     required DiaryControllerFamily super.from,
-    required ({String? categoryId, bool uncategorized, String? tag})
+    required ({
+      String? categoryId,
+      bool uncategorized,
+      String? tag,
+      DateTime? day,
+    })
     super.argument,
   }) : super(
          retry: null,
@@ -51,7 +56,7 @@ final class DiaryControllerProvider
   }
 }
 
-String _$diaryControllerHash() => r'6e61fb687ca427dc51cf2e57ba5a57755eff9b64';
+String _$diaryControllerHash() => r'7331701e06721d4cd96a427caea8cb8007cfef1d';
 
 final class DiaryControllerFamily extends $Family
     with
@@ -60,7 +65,7 @@ final class DiaryControllerFamily extends $Family
           AsyncValue<List<Diary>>,
           List<Diary>,
           FutureOr<List<Diary>>,
-          ({String? categoryId, bool uncategorized, String? tag})
+          ({String? categoryId, bool uncategorized, String? tag, DateTime? day})
         > {
   DiaryControllerFamily._()
     : super(
@@ -75,8 +80,14 @@ final class DiaryControllerFamily extends $Family
     String? categoryId,
     bool uncategorized = false,
     String? tag,
+    DateTime? day,
   }) => DiaryControllerProvider._(
-    argument: (categoryId: categoryId, uncategorized: uncategorized, tag: tag),
+    argument: (
+      categoryId: categoryId,
+      uncategorized: uncategorized,
+      tag: tag,
+      day: day,
+    ),
     from: this,
   );
 
@@ -86,15 +97,23 @@ final class DiaryControllerFamily extends $Family
 
 abstract class _$DiaryController extends $AsyncNotifier<List<Diary>> {
   late final _$args =
-      ref.$arg as ({String? categoryId, bool uncategorized, String? tag});
+      ref.$arg
+          as ({
+            String? categoryId,
+            bool uncategorized,
+            String? tag,
+            DateTime? day,
+          });
   String? get categoryId => _$args.categoryId;
   bool get uncategorized => _$args.uncategorized;
   String? get tag => _$args.tag;
+  DateTime? get day => _$args.day;
 
   FutureOr<List<Diary>> build({
     String? categoryId,
     bool uncategorized = false,
     String? tag,
+    DateTime? day,
   });
   @$mustCallSuper
   @override
@@ -114,6 +133,7 @@ abstract class _$DiaryController extends $AsyncNotifier<List<Diary>> {
         categoryId: _$args.categoryId,
         uncategorized: _$args.uncategorized,
         tag: _$args.tag,
+        day: _$args.day,
       ),
     );
   }

@@ -7,27 +7,33 @@ class DiaryFilter {
 
   final String? tag;
 
-  const DiaryFilter._(this.categoryId, this.uncategorized, this.tag);
+  final DateTime? day;
 
-  const DiaryFilter.all() : this._(null, false, null);
+  const DiaryFilter._(this.categoryId, this.uncategorized, this.tag, this.day);
 
-  const DiaryFilter.category(String id) : this._(id, false, null);
+  const DiaryFilter.all() : this._(null, false, null, null);
 
-  const DiaryFilter.uncategorized() : this._(null, true, null);
+  const DiaryFilter.category(String id) : this._(id, false, null, null);
 
-  const DiaryFilter.tag(String name) : this._(null, false, name);
+  const DiaryFilter.uncategorized() : this._(null, true, null, null);
 
-  bool get isAll => categoryId == null && !uncategorized && tag == null;
+  const DiaryFilter.tag(String name) : this._(null, false, name, null);
+
+  const DiaryFilter.day(DateTime day) : this._(null, false, null, day);
+
+  bool get isAll =>
+      categoryId == null && !uncategorized && tag == null && day == null;
 
   @override
   bool operator ==(Object other) =>
       other is DiaryFilter &&
       other.categoryId == categoryId &&
       other.uncategorized == uncategorized &&
-      other.tag == tag;
+      other.tag == tag &&
+      other.day == day;
 
   @override
-  int get hashCode => Object.hash(categoryId, uncategorized, tag);
+  int get hashCode => Object.hash(categoryId, uncategorized, tag, day);
 
   @override
   String toString() => isAll
@@ -36,6 +42,8 @@ class DiaryFilter {
       ? 'DiaryFilter.uncategorized()'
       : tag != null
       ? 'DiaryFilter.tag($tag)'
+      : day != null
+      ? 'DiaryFilter.day($day)'
       : 'DiaryFilter.category($categoryId)';
 }
 

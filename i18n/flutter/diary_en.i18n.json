@@ -189,5 +189,8 @@
   "tagNoParent": "(top level)",
   "tagRename": "Rename",
   "tagSetParent": "Set parent",
-  "tagSection": "Tags"
+  "tagSection": "Tags",
+  "calendarExpand": "Expand month",
+  "calendarCollapse": "Collapse month",
+  "calendarPickDate": "Pick date"
 }

@@ -25,6 +25,12 @@ Comparator<Diary> diarySortComparator(DiarySort sort) => switch (sort) {
   },
 };
 
+bool _sameDay(DateTime a, DateTime b) {
+  final la = a.toLocal();
+  final lb = b.toLocal();
+  return la.year == lb.year && la.month == lb.month && la.day == lb.day;
+}
+
 List<Diary> applyDiaryEvent(
   List<Diary> list,
   DiaryEvent event, {
@@ -59,6 +65,7 @@ class DiaryController extends _$DiaryController with LoadMoreMixin<Diary> {
     String? categoryId,
     bool uncategorized = false,
     String? tag,
+    DateTime? day,
   }) async {
     final sub = _repository.diaryEvents.listen(_applyChange);
     ref.onDispose(sub.cancel);
@@ -75,6 +82,7 @@ class DiaryController extends _$DiaryController with LoadMoreMixin<Diary> {
       categoryId: categoryId,
       uncategorized: uncategorized,
       tag: tag,
+      day: day,
       limit: limit,
       offset: offset,
       sort: _sort,
@@ -83,6 +91,7 @@ class DiaryController extends _$DiaryController with LoadMoreMixin<Diary> {
 
   void _applyChange(DiaryEvent event) {
     final tagFilter = tag;
+    final dayFilter = day;
     final list = state.value;
     if (list == null) {
       markMissedEvent();
@@ -99,7 +108,8 @@ class DiaryController extends _$DiaryController with LoadMoreMixin<Diary> {
                 : categoryId == null || d.categoryId == categoryId) &&
             (tagFilter == null ||
                 tagFilter.isEmpty ||
-                d.tags.contains(tagFilter)),
+                d.tags.contains(tagFilter)) &&
+            (dayFilter == null || _sameDay(d.time, dayFilter)),
         compare: diarySortComparator(_sort),
         mayHaveMore: !noMore,
       ),

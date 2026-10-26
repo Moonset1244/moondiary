@@ -74,6 +74,8 @@ enum MoodiaryKVs<T extends Object> {
 
   extractHashtags<bool>(defaultValue: false),
 
+  showHomeCalendar<bool>(defaultValue: true),
+
   exportSettings<String>(defaultValue: ''),
 
   searchHistory<List<String>>(),

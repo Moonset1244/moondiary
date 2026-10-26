@@ -445,6 +445,7 @@ class DiaryRepository {
     String? categoryId,
     bool uncategorized = false,
     String? tag,
+    DateTime? day,
     int? offset,
     int? limit,
     DiarySort sort = .timeDesc,
@@ -462,6 +463,15 @@ class DiaryRepository {
         ..addColumns([_db.diaryTags.diaryId])
         ..where(_db.diaryTags.tag.equals(tagName));
       q.where((d) => d.id.isInQuery(taggedIds));
+    }
+    if (day != null) {
+      final start = DateTime(day.year, day.month, day.day);
+      final end = start.add(const Duration(days: 1));
+      q.where(
+        (d) =>
+            d.time.isBiggerOrEqualValue(dbTime(start)) &
+            d.time.isSmallerThanValue(dbTime(end)),
+      );
     }
     _orderBy(q, sort);
     if (limit != null) q.limit(limit, offset: offset);
@@ -497,6 +507,38 @@ class DiaryRepository {
     for (final row in await q.get()) {
       final local = dbToTime(row.read(col)!).toLocal();
       final key = DateTime(local.year, local.month);
+      counts[key] = (counts[key] ?? 0) + 1;
+    }
+    return counts;
+  }
+
+  /// 按天统计可见日记数（主页日历条用）。
+  Future<Map<DateTime, int>> diaryCountByDay({
+    String? categoryId,
+    bool uncategorized = false,
+    String? tag,
+  }) async {
+    assert(!(uncategorized && categoryId != null));
+    final col = _db.diaries.time;
+    final q = _db.selectOnly(_db.diaries)
+      ..addColumns([col])
+      ..where(_db.diaries.show.equals(1));
+    if (uncategorized) {
+      q.where(_db.diaries.categoryId.isNull());
+    } else if (categoryId != null) {
+      q.where(_db.diaries.categoryId.equals(categoryId));
+    }
+    if (tag != null && tag.isNotEmpty) {
+      final tagName = tag;
+      final taggedIds = _db.selectOnly(_db.diaryTags)
+        ..addColumns([_db.diaryTags.diaryId])
+        ..where(_db.diaryTags.tag.equals(tagName));
+      q.where(_db.diaries.id.isInQuery(taggedIds));
+    }
+    final counts = <DateTime, int>{};
+    for (final row in await q.get()) {
+      final local = dbToTime(row.read(col)!).toLocal();
+      final key = DateTime(local.year, local.month, local.day);
       counts[key] = (counts[key] ?? 0) + 1;
     }
     return counts;

@@ -62,7 +62,18 @@ class _DiaryListViewState extends ConsumerState<_DiaryListView> {
       }
     });
 
-    final body = _buildDiaryView(filter);
+    final body = ValueListenableBuilder(
+      valueListenable: MoodiaryKVs.showHomeCalendar.getNotifier(),
+      builder: (context, showCalendar, _) {
+        if (!showCalendar) return _buildDiaryView(filter);
+        return Column(
+          children: [
+            HomeCalendarStrip(filter: filter),
+            Expanded(child: _buildDiaryView(filter)),
+          ],
+        );
+      },
+    );
     return PopScope(
       canPop: !selecting,
       onPopInvokedWithResult: (didPop, _) {

@@ -187,5 +187,6 @@
   "showMetaTags": "Show tags",
   "showMetaMood": "Show mood",
   "extractHashtags": "Extract #hashtags as tags",
-  "extractHashtagsSubtitle": "On save, move #hashtags out of the body into tags"
+  "extractHashtagsSubtitle": "On save, move #hashtags out of the body into tags",
+  "showHomeCalendar": "Show calendar on home"
 }

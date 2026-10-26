@@ -88,3 +88,14 @@ BEGIN
   INSERT INTO diary_fts (rowid, title, content_text)
     VALUES (new.rid, new.title, new.content_text);
 END;
+
+-- 标签注册表（user_version 4 追加，自记多级标签）。层级（parent_id 自引用，NULL=顶级）
+-- + 颜色；diary_tags 仍按名字关联（旧备份包保持可恢复），重命名时事务内同步更新
+-- diary_tags.tag。形态对齐 categories（id/name/last_modified/parent_id/color）。
+CREATE TABLE tags (
+  id            TEXT NOT NULL PRIMARY KEY,
+  name          TEXT NOT NULL UNIQUE,
+  last_modified INTEGER NOT NULL,
+  parent_id     TEXT,
+  color         INTEGER
+) AS TagRow;

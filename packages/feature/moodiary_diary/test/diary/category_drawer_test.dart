@@ -51,7 +51,7 @@ void main() {
     expect(find.text('阅读'), findsOneWidget);
     expect(find.text('4'), findsOneWidget);
     expect(find.text('未分类'), findsNothing);
-    expect(find.text('无分类'), findsOneWidget);
+    expect(find.text('无日记本'), findsOneWidget);
     expect(find.text('1'), findsNWidgets(2));
   });
 
@@ -98,11 +98,11 @@ void main() {
       const DiaryFilter.category('tr'),
     );
     expect(container.read(diarySelectionProvider), isEmpty);
-    expect(find.text('管理分类'), findsNothing);
+    expect(find.text('管理日记本'), findsNothing);
 
     key.currentState!.openDrawer();
     await t.pumpAndSettle();
-    await t.tap(find.text('无分类'));
+    await t.tap(find.text('无日记本'));
     await t.pumpAndSettle();
     expect(
       container.read(homeDiaryFilterProvider),
@@ -131,7 +131,7 @@ void main() {
   testWidgets('the manage entry is always reachable', (t) async {
     await t.pumpWidget(wrap(categories: three, byCategory: const {}, total: 0));
     await t.pumpAndSettle();
-    expect(find.text('管理分类'), findsOneWidget);
+    expect(find.text('管理日记本'), findsOneWidget);
   });
 
   testWidgets('search box only appears once categories pile up', (t) async {

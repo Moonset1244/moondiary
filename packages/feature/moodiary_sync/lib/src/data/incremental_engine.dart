@@ -482,6 +482,12 @@ class IncrementalSyncEngine {
         _logger.warn(.error, reason: .unknownTombstone, payload: {'key': key});
         return;
       }
+      if (kind == .tag) {
+        // 自记：标签暂不参与增量对象同步（全量快照通道已覆盖标签表），
+        // 墓碑即清防堆积；下方 switch 的 .tag 分支因此不可达，仅保完备。
+        scheduleCleanup(key);
+        return;
+      }
       final (skipKind, pushKind, idKey) = switch (kind) {
         .diary => (
           SyncEventKind.diarySkip,
@@ -497,6 +503,11 @@ class IncrementalSyncEngine {
           SyncEventKind.placeSkip,
           SyncEventKind.placeTombstonePush,
           'placeId',
+        ),
+        .tag => (
+          SyncEventKind.tagSkip,
+          SyncEventKind.tagTombstonePush,
+          'tagId',
         ),
       };
       if (remoteEntry == null || remoteEntry.deleted) {
@@ -532,6 +543,9 @@ class IncrementalSyncEngine {
         case .place:
           deferredObjectDeletes.add(SyncKeys.placeObjectPath(t.entityId));
           placeChanged++;
+        case .tag:
+          // 不可达（上方提前返回），保 switch 完备
+          break;
       }
       if (trackingId != null) tombstones.markPushed(key, trackingId);
       _logger.info(

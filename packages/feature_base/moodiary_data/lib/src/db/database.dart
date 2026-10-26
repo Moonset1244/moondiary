@@ -61,7 +61,7 @@ class MoodiaryDatabase extends _$MoodiaryDatabase {
   }
 
   @override
-  int get schemaVersion => 3;
+  int get schemaVersion => 4;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
@@ -110,6 +110,15 @@ class MoodiaryDatabase extends _$MoodiaryDatabase {
               }
               await customStatement(
                 "INSERT INTO diary_fts(diary_fts) VALUES('rebuild')",
+              );
+            },
+            from3To4: (m, schema) async {
+              // 自记：标签注册表。既有扁平标签按名去重后种入，全部为顶级。
+              await m.createTable(schema.tags);
+              await customStatement(
+                'INSERT INTO tags (id, name, last_modified, parent_id) '
+                "SELECT lower(hex(randomblob(16))), tag, CAST(strftime('%s','now') AS INTEGER), NULL "
+                'FROM (SELECT DISTINCT tag FROM diary_tags)',
               );
             },
           ),

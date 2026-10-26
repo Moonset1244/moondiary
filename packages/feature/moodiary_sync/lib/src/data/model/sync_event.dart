@@ -22,6 +22,8 @@ enum SyncEventKind {
   placeSkip,
   placeTombstonePush,
   placeTombstonePull,
+  tagSkip,
+  tagTombstonePush,
   mediaUpload,
   mediaDownload,
   mediaSkip,

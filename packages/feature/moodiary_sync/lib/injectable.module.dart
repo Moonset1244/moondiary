@@ -20,7 +20,7 @@ import 'package:moodiary_sync/src/data/sync_logger.dart' as _i59;
 import 'package:moodiary_sync/src/data/sync_options_module.dart' as _i997;
 
 class MoodiarySyncPackageModule extends _i526.MicroPackageModule {
-  // initializes the registration of main-scope dependencies inside of GetIt
+// initializes the registration of main-scope dependencies inside of GetIt
   @override
   _i687.FutureOr<void> init(_i526.GetItHelper gh) async {
     final syncOptionsModule = _$SyncOptionsModule();
@@ -39,12 +39,11 @@ class MoodiarySyncPackageModule extends _i526.MicroPackageModule {
       instanceName: 'webdav',
     );
     gh.lazySingleton<_i691.IBackupArchive>(
-      () => const _i218.SyncBackupArchive(),
-    );
-    gh.singleton<_i443.SyncRunner>(
-      () =>
-          _i443.SyncRunner(gh<_i870.SyncCancellation>(), gh<_i59.SyncLogger>()),
-    );
+        () => const _i218.SyncBackupArchive());
+    gh.singleton<_i443.SyncRunner>(() => _i443.SyncRunner(
+          gh<_i870.SyncCancellation>(),
+          gh<_i59.SyncLogger>(),
+        ));
     gh.lazySingleton<_i472.IRemoteSyncBackend>(
       () => _i454.S3SyncBackend(gh<_i731.SecureOptions>(instanceName: 's3')),
       instanceName: 's3',
@@ -63,8 +62,7 @@ class MoodiarySyncPackageModule extends _i526.MicroPackageModule {
     );
     gh.lazySingleton<_i472.IRemoteSyncBackend>(
       () => _i351.WebDavSyncBackend(
-        gh<_i731.SecureOptions>(instanceName: 'webdav'),
-      ),
+          gh<_i731.SecureOptions>(instanceName: 'webdav')),
       instanceName: 'webdav',
     );
   }

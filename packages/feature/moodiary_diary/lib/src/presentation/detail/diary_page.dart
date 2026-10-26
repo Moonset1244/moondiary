@@ -346,16 +346,84 @@ class _DiaryPageState extends ConsumerState<DiaryPage>
   }
 
   Future<void> _onAddTag(Diary current) async {
-    final tag = await _editorController.withInputSuspended(
-      () => MAlert.prompt(
-        context,
-        title: l10n.diary.addTag,
-        hintText: l10n.diary.tagNameHint,
-        confirmLabel: l10n.diary.add,
+    final l10n = context.l10n;
+    // 标签选择面板：多级标签树 + 自由新建（自记）
+    final controller = TextEditingController();
+    final tag = await MAlert.show<String>(
+      context,
+      title: l10n.diary.addTag,
+      actions: [MAction(label: l10n.common.cancel, value: '')],
+      content: Consumer(
+        builder: (context, ref, _) {
+          final allTags = ref.watch(tagControllerProvider).value ?? [];
+          final selected = current.tags;
+          final available = allTags
+              .where((t) => !selected.contains(t.name))
+              .toList()
+            ..sort((a, b) {
+              final ap = a.parentId == null ? a.name : '\u{FFFF}$a.name';
+              final bp = b.parentId == null ? b.name : '\u{FFFF}$b.name';
+              return ap.compareTo(bp);
+            });
+          return Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              if (available.isEmpty)
+                Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Text(l10n.diary.tagEmpty),
+                ),
+              for (final t in available)
+                ListTile(
+                  dense: true,
+                  leading: t.parentId == null
+                      ? const Icon(LucideIcons.tag, size: 18)
+                      : const Padding(
+                          padding: EdgeInsets.only(left: 16),
+                          child: Icon(LucideIcons.cornerDownRight, size: 16),
+                        ),
+                  title: Text(t.name),
+                  onTap: () => Navigator.of(context).pop(t.name),
+                ),
+              const Divider(height: 1),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16, 4, 16, 4),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: TextField(
+                        controller: controller,
+                        autofocus: true,
+                        decoration: InputDecoration(
+                          hintText: l10n.diary.tagNameHint,
+                          isDense: true,
+                        ),
+                        onSubmitted: (v) =>
+                            Navigator.of(context).pop(v.trim()),
+                      ),
+                    ),
+                    IconButton(
+                      icon: const Icon(LucideIcons.plus),
+                      onPressed: () =>
+                          Navigator.of(context).pop(controller.text.trim()),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          );
+        },
       ),
     );
     if (tag == null || tag.isEmpty || !mounted) return;
     if (current.tags.contains(tag)) return;
+    // 自由输入的标签顺带入注册表，保证层级体系完整
+    final tags = ref.read(tagControllerProvider).value ?? [];
+    if (!tags.any((t) => t.name == tag)) {
+      await ref
+          .read(tagControllerProvider.notifier)
+          .upsertTag(Tag.create(name: tag));
+    }
     ref.read(_provider.notifier).changeTags([...current.tags, tag]);
     _dirty = true;
     _scheduleAutoSave();

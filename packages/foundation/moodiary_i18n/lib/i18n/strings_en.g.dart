@@ -67,7 +67,7 @@ class _Translations$app$en extends Translations$app$zh {
 	@override String get homeNavigatorDiary => 'Diary';
 	@override String get homeNavigatorAssistant => 'Assistant';
 	@override String get homePageAddDiaryButton => 'Create a diary';
-	@override String get categoryDeletedReset => 'Category deleted, showing all diaries';
+	@override String get categoryDeletedReset => 'Notebook deleted, switched to All';
 	@override String get homeNavigatorSetting => 'Setting';
 	@override String get languageSystem => 'Follow System';
 	@override String get languageSimplifiedChinese => '简体中文';
@@ -76,7 +76,7 @@ class _Translations$app$en extends Translations$app$zh {
 	@override String get sectionData => 'Data';
 	@override String get recycle => 'Recycle bin';
 	@override String get syncBackup => 'Sync and backup';
-	@override String get categoryManager => 'Categories';
+	@override String get categoryManager => 'Manage notebooks';
 	@override String get placeManager => 'Places';
 	@override String get mapTitle => 'Footprints';
 	@override String get sectionDisplay => 'Display';
@@ -159,7 +159,7 @@ class _Translations$app$en extends Translations$app$zh {
 	@override String get semanticDescQwen3 => 'Multilingual, recalls subtle phrasing';
 	@override String get dashJournalDays => 'Days journaling';
 	@override String get dashWordCount => 'Words';
-	@override String get dashCategoryCount => 'Categories';
+	@override String get dashCategoryCount => 'Notebooks';
 	@override String get dashTagCount => 'Tags';
 	@override String get homeNavigatorMe => 'Me';
 	@override String get meTitle => 'Me';
@@ -194,7 +194,7 @@ class _Translations$app$en extends Translations$app$zh {
 	@override String stressCleared({required Object count}) => 'Removed ${count} stress-test entries';
 	@override String get repairTitle => 'Repair data';
 	@override String get repairSubtitle => 'Check and repair derived entry data';
-	@override String get repairMessage => 'Scans every entry to regenerate card previews and media references, clear dangling categories and rebuild the search index. Your text is never modified.';
+	@override String get repairMessage => 'Scans every entry to regenerate card previews and media references, clear dangling notebookies and rebuild the search index. Your text is never modified.';
 	@override String get repairStart => 'Start';
 	@override String get repairRunning => 'Repairing…';
 	@override String get repairFailed => 'The repair failed';
@@ -203,7 +203,7 @@ class _Translations$app$en extends Translations$app$zh {
 	@override String repairFixed({required Object count}) => 'Repaired ${count} entries:';
 	@override String repairFixedPreview({required Object count}) => '· card preview: ${count}';
 	@override String repairFixedMedia({required Object count}) => '· media references: ${count}';
-	@override String repairFixedOrphan({required Object count}) => '· dangling categories: ${count}';
+	@override String repairFixedOrphan({required Object count}) => '· dangling notebookies: ${count}';
 	@override String repairReindexed({required Object count}) => 'Search index rebuilt (${count} entries).';
 	@override String get repairDoneTitle => 'Repair finished';
 	@override String get repairOk => 'Got it';
@@ -321,25 +321,25 @@ class _Translations$assistant$en extends Translations$assistant$zh {
 	@override String get memoryEmptyDes => 'Say “remember that…” in a chat, or tell the assistant about a habit, and it saves it.';
 	@override String get memoryNoMatch => 'No memory matches';
 	@override String get toolSearchTitle => 'Search diaries';
-	@override String get toolSearchDes => 'Find your local diaries by keyword or by meaning, or browse them by date and category. The meaning path needs the local semantic index enabled in settings.';
+	@override String get toolSearchDes => 'Find your local diaries by keyword or by meaning, or browse them by date and notebook. The meaning path needs the local semantic index enabled in settings.';
 	@override String get toolGetTitle => 'Read full diary';
 	@override String get toolGetDes => 'Read the full text of diaries by id, several at a time.';
 	@override String get toolOverviewTitle => 'Diary overview';
-	@override String get toolOverviewDes => 'Counts your diaries in total and per category, and their date span.';
+	@override String get toolOverviewDes => 'Counts your diaries in total and per notebook, and their date span.';
 	@override String get toolCreateTitle => 'Create diary';
 	@override String get toolCreateDes => 'Saves content as a new local diary entry when you ask.';
 	@override String get toolUpdateTitle => 'Edit diary';
-	@override String get toolUpdateDes => 'Change the title, body, mood or category of diaries, several at a time.';
+	@override String get toolUpdateDes => 'Change the title, body, mood or notebook of diaries, several at a time.';
 	@override String get toolDeleteTitle => 'Delete diary';
 	@override String get toolDeleteDes => 'Move diaries to the recycle bin, where you can restore them.';
-	@override String get toolListCategoriesTitle => 'View categories';
-	@override String get toolListCategoriesDes => 'Lists all of your diary categories.';
-	@override String get toolCreateCategoryTitle => 'Create category';
-	@override String get toolCreateCategoryDes => 'Add diary categories.';
-	@override String get toolUpdateCategoryTitle => 'Rename category';
-	@override String get toolUpdateCategoryDes => 'Rename categories.';
-	@override String get toolDeleteCategoryTitle => 'Delete category';
-	@override String get toolDeleteCategoryDes => 'Delete categories, only while they hold no diaries.';
+	@override String get toolListCategoriesTitle => 'View notebooks';
+	@override String get toolListCategoriesDes => 'Lists all of your diary notebooks.';
+	@override String get toolCreateCategoryTitle => 'Create notebook';
+	@override String get toolCreateCategoryDes => 'Add diary notebooks.';
+	@override String get toolUpdateCategoryTitle => 'Rename notebook';
+	@override String get toolUpdateCategoryDes => 'Rename notebooks.';
+	@override String get toolDeleteCategoryTitle => 'Delete notebook';
+	@override String get toolDeleteCategoryDes => 'Delete notebooks, only while they hold no diaries.';
 	@override String get toolRecallMemoryTitle => 'Recall memory';
 	@override String get toolRecallMemoryDes => 'Look up saved long-term facts about you when they are needed.';
 	@override String get toolRememberTitle => 'Remember a fact';
@@ -450,7 +450,7 @@ class _Translations$assistant$en extends Translations$assistant$zh {
 	@override String get approvalConfirmDelete => 'Delete';
 	@override String get approvalConfirmRemember => 'Remember';
 	@override String get approvalFieldTitle => 'Title';
-	@override String get approvalFieldCategory => 'Category';
+	@override String get approvalFieldCategory => 'notebook';
 	@override String get approvalFieldContent => 'Text';
 	@override String get approvalFieldName => 'Name';
 	@override String get approvalNoCategory => 'Uncategorised';
@@ -460,7 +460,7 @@ class _Translations$assistant$en extends Translations$assistant$zh {
 	@override String get approvalIrreversible => 'Cannot be undone';
 	@override String approvalDiaryCount({required Object count}) => '${count} entries';
 	@override String approvalItemCount({required Object count}) => '${count} items';
-	@override String approvalCategoryTo({required Object name}) => 'category → ${name}';
+	@override String approvalCategoryTo({required Object name}) => 'notebook → ${name}';
 	@override String approvalMore({required Object count}) => '${count} more';
 	@override String get toolAwaitingConfirm => 'Waiting for you';
 	@override String get toolSkipped => 'Skipped';
@@ -531,13 +531,13 @@ class _Translations$common$en extends Translations$common$zh {
 	@override String get media => 'Media';
 	@override String get audio => 'Audio';
 	@override String get video => 'Video';
-	@override String get category => 'Category';
+	@override String get category => 'notebook';
 	@override String get name => 'Name';
 	@override String get delete => 'Delete';
 	@override String get loadFailed => 'Something went wrong';
 	@override String get untitled => 'Untitled';
 	@override String get retry => 'Retry';
-	@override String categoryCount({required Object count}) => '${count} categories';
+	@override String categoryCount({required Object count}) => '${count} notebooks';
 	@override String get fileName => 'File name';
 	@override String get close => 'Close';
 	@override String get appName => 'Moodiary';
@@ -555,8 +555,8 @@ class _Translations$diary$en extends Translations$diary$zh {
 	// Translations
 	@override String get tabViewEmpty => 'Nothing here yet';
 	@override String get pageViewModeButton => 'View mode';
-	@override String get categoryNoCategory => 'No category';
-	@override String get allCategories => 'All categories';
+	@override String get categoryNoCategory => 'No notebook';
+	@override String get allCategories => 'All notebooks';
 	@override String get categoryAll => 'All';
 	@override String get categoryColorLabel => 'Color';
 	@override String get search => 'Search';
@@ -603,11 +603,11 @@ class _Translations$diary$en extends Translations$diary$zh {
 	@override String get graphBackToCenter => 'Recenter';
 	@override String get graphLinks => 'Links';
 	@override String get graphNoLocalLinks => 'This diary has no links yet';
-	@override String get categorySearchHint => 'Search categories';
+	@override String get categorySearchHint => 'Search notebooks';
 	@override String get categoryAllDiary => 'All diaries';
-	@override String get categoryNoMatch => 'No matching categories';
-	@override String get categorySyncingPlaceholder => 'Syncing category…';
-	@override String get categoryManageEntry => 'Manage categories';
+	@override String get categoryNoMatch => 'No matching notebooks';
+	@override String get categorySyncingPlaceholder => 'Syncing notebooks…';
+	@override String get categoryManageEntry => 'Manage notebooks';
 	@override String get sortTitle => 'Sort';
 	@override String get sortNewestFirst => 'Newest first';
 	@override String get sortOldestFirst => 'Oldest first';
@@ -617,22 +617,22 @@ class _Translations$diary$en extends Translations$diary$zh {
 		other: '${count} entries',
 	);
 	@override String get rangeLast7 => 'Last 7 days';
-	@override String get categoryManagerTitle => 'Categories';
+	@override String get categoryManagerTitle => 'Notebooks';
 	@override String categoryCreated({required Object name}) => 'Created “${name}”';
 	@override String get categoryCreateFailed => 'Could not create it';
 	@override String categoryRenamed({required Object name}) => 'Renamed to “${name}”';
 	@override String get categoryRenameFailed => 'Could not rename it';
-	@override String get categoryDeleteTitle => 'Delete this category?';
-	@override String categoryDeleteMessage({required Object name}) => '“${name}” can’t be deleted while entries (even in the recycle bin) are filed under it. Entries are kept.';
+	@override String get categoryDeleteTitle => 'Delete notebook?';
+	@override String categoryDeleteMessage({required Object name}) => '"${name}" still has diaries (incl. trash); diaries are kept.';
 	@override String get categoryDeleted => 'Deleted';
 	@override String get categoryDeleteBlocked => 'Still has entries (check the recycle bin)';
-	@override String get categoryEmpty => 'No categories yet';
-	@override String get categoryNew => 'New category';
+	@override String get categoryEmpty => 'No notebooks';
+	@override String get categoryNew => 'New notebook';
 	@override String categoryDiaryCount({required Object count}) => '${count} entries';
 	@override String get categoryNoDiary => 'No entries';
 	@override String get rename => 'Rename';
-	@override String get categoryNameHint => 'Category name';
-	@override String get categoryNameEmpty => 'The name cannot be empty';
+	@override String get categoryNameHint => 'Notebook name';
+	@override String get categoryNameEmpty => 'Notebook name cannot be empty';
 	@override String get recycleTitle => 'Recycle bin';
 	@override String get recycleClear => 'Empty the bin';
 	@override String get recycleRestored => 'Restored';
@@ -721,7 +721,7 @@ class _Translations$diary$en extends Translations$diary$zh {
 	@override String get saved => 'Saved';
 	@override String get unsaved => 'Unsaved';
 	@override String get saveFailed => 'Could not save';
-	@override String get unknownCategory => 'Unknown category';
+	@override String get unknownCategory => 'Unknown notebook';
 	@override String get loading => 'Loading…';
 	@override String get searchReindexHint => 'Rebuild the index after upgrading so older entries become searchable';
 	@override String get searchReindex => 'Rebuild';
@@ -730,6 +730,19 @@ class _Translations$diary$en extends Translations$diary$zh {
 	@override String get calendarEmptyDay => 'Nothing written that day';
 	@override String get calendarYearView => 'Year view';
 	@override String get calendarMonthView => 'Month view';
+	@override String get tagManagerTitle => 'Tags';
+	@override String get tagManageEntry => 'Manage tags';
+	@override String get tagNew => 'New tag';
+	@override String get tagEmpty => 'No tags';
+	@override String get tagNameEmpty => 'Tag name cannot be empty';
+	@override String get tagDeleteTitle => 'Delete tag?';
+	@override String get tagDeleteBlocked => 'In use by diaries or child tags';
+	@override String get tagCreateFailed => 'Create failed';
+	@override String get tagSelectTitle => 'Select tags';
+	@override String tagNewUnder({required Object name}) => 'New under "${name}"';
+	@override String get tagNoParent => '(top level)';
+	@override String get tagRename => 'Rename';
+	@override String get tagSetParent => 'Set parent';
 }
 
 // Path: editor
@@ -742,12 +755,12 @@ class _Translations$editor$en extends Translations$editor$zh {
 	@override String get audioFileError => 'Audio file error';
 	@override String get unsupportedPlatform => 'The editor is not supported on this platform';
 	@override String loadFailed({required Object error}) => 'Failed to load the editor\n${error}';
-	@override String get pickCategory => 'Pick a category';
-	@override String get noCategory => 'No category';
+	@override String get pickCategory => 'Pick notebook';
+	@override String get noCategory => 'No notebook';
 	@override String get migrationTitle => 'Upgrade data migration';
 	@override String get migrationIntro => 'Version 2.8.0 uses a new data engine and editor. A one-time migration is required before you can continue.';
 	@override String get migrationStepEngine => 'Database engine upgrade';
-	@override String get migrationStepEngineDesc => 'Moves diaries, categories, fonts and all other data into the new database';
+	@override String get migrationStepEngineDesc => 'Moves diaries, notebooks, fonts and all other data into the new database';
 	@override String get migrationStepEditor => 'Diary format conversion';
 	@override String get migrationStepEditorDesc => 'Converts old-format content to the new editor format; originals are backed up first';
 	@override String get migrationContentIntro => 'The new editor needs your diaries upgraded to a new format before you can continue.';
@@ -775,7 +788,7 @@ class _Translations$editor$en extends Translations$editor$zh {
 	@override String get migrationDoneSubtitle => 'All data has been moved to the new engine; old data is kept as a backup';
 	@override String get migrationSummaryDiaries => 'Diaries';
 	@override String migrationSummaryDiariesCount({required Object count}) => '${count}';
-	@override String get migrationSummaryCategories => 'Categories';
+	@override String get migrationSummaryCategories => 'notebooks';
 	@override String migrationSummaryCategoriesCount({required Object count}) => '${count}';
 	@override String get migrationSummaryMedia => 'Media & fonts';
 	@override String get migrationSummaryMigrated => 'Migrated';
@@ -803,7 +816,7 @@ class _Translations$export$en extends Translations$export$zh {
 	@override String get restoreConfirmLabel => 'Restore';
 	@override String get restoring => 'Restoring…';
 	@override String restoreDone({required Object summary}) => 'Restored: ${summary}';
-	@override String restoreSummary({required Object diary, required Object category, required Object media}) => '${diary} diaries / ${category} categories / ${media} media files';
+	@override String restoreSummary({required Object diary, required Object category, required Object media}) => '${diary} diaries / ${category} notebooks / ${media} media files';
 	@override String restoreSummarySkipped({required Object base, required Object skipped}) => '${base}, ${skipped} skipped (this device has newer content)';
 	@override String restoreSummaryFailed({required Object base, required Object failed}) => '${base}, ${failed} failed';
 	@override String restorePartial({required Object summary}) => 'Restore did not fully succeed: ${summary}. Check storage space and connection, then retry — don\'t delete the old device\'s data yet';
@@ -853,7 +866,7 @@ class _Translations$export$en extends Translations$export$zh {
 	@override String skippedMedia({required Object count}) => '${count} media files were missing and were skipped';
 	@override String unsupportedNodes({required Object count, required Object types}) => '${count} kinds of content can\'t be exported in this version yet: ${types}';
 	@override String get scopeAll => 'All entries';
-	@override String get scopeByCategory => 'By category';
+	@override String get scopeByCategory => 'By notebook';
 	@override String get scopeByDate => 'By date';
 	@override String get scopePicked => 'Pick manually';
 	@override String scopePickedLabel({required Object count}) => '${count} selected';
@@ -864,7 +877,7 @@ class _Translations$export$en extends Translations$export$zh {
 	@override String get nothingSelected => 'Nothing selected';
 	@override String get confirm => 'Done';
 	@override String get uncategorized => 'Uncategorized';
-	@override String get deletedCategory => 'Deleted category';
+	@override String get deletedCategory => 'Deleted notebook';
 	@override String get pdfFontPageTitle => 'PDF font';
 	@override String get importedFonts => 'Imported fonts';
 	@override String get importFont => 'Import font';
@@ -906,12 +919,12 @@ class _Translations$export$en extends Translations$export$zh {
 	@override String get importSpec => 'Format';
 	@override String get importSpecEntries => 'Every .md file at the top level of the zip is one entry; a single .md file also works.';
 	@override String get importSpecAssets => 'Put images, videos and audio under assets/ (subfolders allowed) and reference them with relative paths.';
-	@override String get importSpecFrontMatter => 'An optional front matter at the top may set title, time, mood, category, tags, weather and position. Without it, the title comes from the first level-1 heading or the file name, and the time from a date at the start of the file name.';
+	@override String get importSpecFrontMatter => 'An optional front matter at the top may set title, time, mood, notebook, tags, weather and position. Without it, the title comes from the first level-1 heading or the file name, and the time from a date at the start of the file name.';
 	@override String get importSpecRoundTrip => 'Markdown exported by this app without merging can be imported back directly; merged single-file exports are not supported.';
-	@override String get importSpecExample => 'diaries.zip\n├── 2026-09-06-sunny.md\n├── 2026-09-07-walk.md\n└── assets/\n    ├── image/a.jpg\n    └── video/b.mp4\n\n2026-09-06-sunny.md\n---\ntitle: "Sunny"\ntime: 2026-09-06T10:30:00+08:00\nmood: fulfilled\ncategory: "Life"\ntags: ["weekend"]\n---\n\nWent out for a walk today.\n![](assets/image/a.jpg)';
+	@override String get importSpecExample => 'diaries.zip\n├── 2026-09-06-sunny.md\n├── 2026-09-07-walk.md\n└── assets/\n    ├── image/a.jpg\n    └── video/b.mp4\n\n2026-09-06-sunny.md\n---\ntitle: "Sunny"\ntime: 2026-09-06T10:30:00+08:00\nmood: fulfilled\nnotebook: "Life"\ntags: ["weekend"]\n---\n\nWent out for a walk today.\n![](assets/image/a.jpg)';
 	@override String importRunButton({required Object count}) => 'Import ${count} entries';
 	@override String importProgress({required Object done, required Object total}) => 'Importing ${done}/${total}';
-	@override String importSummary({required Object diary, required Object category, required Object place}) => '${diary} entries / ${category} new categories / ${place} new places';
+	@override String importSummary({required Object diary, required Object category, required Object place}) => '${diary} entries / ${category} new notebooks / ${place} new places';
 	@override String importSummarySkipped({required Object base, required Object skipped}) => '${base}, ${skipped} skipped (already exist)';
 	@override String importSummaryFailed({required Object base, required Object failed}) => '${base}, ${failed} failed';
 	@override String importDone({required Object summary}) => 'Imported: ${summary}';
@@ -1141,11 +1154,11 @@ class _Translations$sync$en extends Translations$sync$zh {
 	@override String get kindDiarySkip => 'Entry skipped';
 	@override String get kindDiaryTombstonePush => 'Entry deletion pushed';
 	@override String get kindDiaryTombstonePull => 'Entry deletion pulled';
-	@override String get kindCategoryUpload => 'Category uploaded';
-	@override String get kindCategoryDownload => 'Category downloaded';
-	@override String get kindCategorySkip => 'Category skipped';
-	@override String get kindCategoryTombstonePush => 'Category deletion pushed';
-	@override String get kindCategoryTombstonePull => 'Category deletion pulled';
+	@override String get kindCategoryUpload => 'notebook uploaded';
+	@override String get kindCategoryDownload => 'notebook downloaded';
+	@override String get kindCategorySkip => 'notebook skipped';
+	@override String get kindCategoryTombstonePush => 'notebook deletion pushed';
+	@override String get kindCategoryTombstonePull => 'notebook deletion pulled';
 	@override String get kindPlaceUpload => 'Place upload';
 	@override String get kindPlaceDownload => 'Place download';
 	@override String get kindPlaceSkip => 'Place skipped';
@@ -1194,7 +1207,7 @@ class _Translations$sync$en extends Translations$sync$zh {
 	@override String get statusLastSync => 'Last synced ';
 	@override String get statusNever => 'Never synced';
 	@override String get rowDiary => 'Entries';
-	@override String get rowCategory => 'Categories';
+	@override String get rowCategory => 'notebooks';
 	@override String get rowMedia => 'Media';
 	@override String get statusRunning => 'Syncing';
 	@override String get lanSendTitle => 'Send over the local network';
@@ -1220,7 +1233,7 @@ class _Translations$sync$en extends Translations$sync$zh {
 	@override String get lanPinHelp => 'Enter it on the sending device · tap to copy';
 	@override String get lanAddressCopied => 'Address copied';
 	@override String get lanUpToDate => 'Already up to date — nothing changed';
-	@override String lanReceived({required Object diary, required Object category}) => '${diary} entries · ${category} categories';
+	@override String lanReceived({required Object diary, required Object category}) => '${diary} entries · ${category} notebooks';
 	@override String lanReceivedFailed({required Object base, required Object failed}) => '${base} (${failed} failed)';
 	@override String get lanWaiting => 'Waiting for the sender to connect…';
 	@override String get lanReceiving => 'Receiving';
@@ -1252,7 +1265,7 @@ class _Translations$sync$en extends Translations$sync$zh {
 	@override String get keyTurnOff => 'Turn encryption off';
 	@override String get keyChanged => 'Password changed';
 	@override String get keyEncryptCloudTitle => 'Encrypt cloud data?';
-	@override String get keyEncryptCloudMessage => 'Existing diaries, categories and media in the cloud will be encrypted, with the key protected by your password.';
+	@override String get keyEncryptCloudMessage => 'Existing diaries, notebooks and media in the cloud will be encrypted, with the key protected by your password.';
 	@override String get keyContinue => 'Continue';
 	@override String keyWriteFailed({required Object error}) => 'Could not write the key to the cloud: ${error}';
 	@override String keyCloudEncrypted({required Object report}) => 'Remote data encrypted: ${report}';
@@ -1342,11 +1355,11 @@ class _Translations$sync$en extends Translations$sync$zh {
 	@override String warnMediaFailed({required Object count}) => '${count} media file(s) could not be downloaded; images or audio may be missing from those entries';
 	@override String get warnStopped => 'Stopped by you — the rest will continue on the next sync';
 	@override String warnFailedCount({required Object count}) => '${count} failed';
-	@override String reCipherSummary({required Object diary, required Object category, required Object media, required Object ms}) => '${diary} entries + ${category} categories + ${media} files (${ms}ms)';
+	@override String reCipherSummary({required Object diary, required Object category, required Object media, required Object ms}) => '${diary} entries + ${category} notebooks + ${media} files (${ms}ms)';
 	@override String reCipherFailedSuffix({required Object base, required Object failed}) => '${base}\n${failed} objects failed and were skipped';
 	@override String get stepPrepare => 'Preparing';
 	@override String stepDiary({required Object id}) => 'Entry ${id}';
-	@override String stepCategory({required Object id}) => 'Category ${id}';
+	@override String stepCategory({required Object id}) => 'notebook ${id}';
 	@override String stepPlace({required Object id}) => 'Place ${id}';
 	@override String stepMediaInfo({required Object id}) => 'Media record ${id}';
 	@override String stepMedia({required Object ref}) => 'Media ${ref}';
@@ -1354,9 +1367,9 @@ class _Translations$sync$en extends Translations$sync$zh {
 	@override String get statusPartial => 'Sync incomplete';
 	@override String get summaryUpToDate => 'Nothing to sync';
 	@override String summaryUploadedDiaries({required Object count}) => '${count} diaries uploaded';
-	@override String summaryUploadedCategories({required Object count}) => '${count} categories uploaded';
+	@override String summaryUploadedCategories({required Object count}) => '${count} notebooks uploaded';
 	@override String summaryDownloadedDiaries({required Object count}) => '${count} diaries downloaded';
-	@override String summaryDownloadedCategories({required Object count}) => '${count} categories downloaded';
+	@override String summaryDownloadedCategories({required Object count}) => '${count} notebooks downloaded';
 	@override String summaryMedia({required Object count}) => '${count} media files';
 	@override String get lanAuthLocked => 'Too many incorrect pairing codes. This session is locked — start receiving again to get a new code.';
 	@override String errWriteRemote({required Object key, required Object error}) => 'Failed to write remote object (${key}): ${error}';
@@ -1398,6 +1411,8 @@ class _Translations$sync$en extends Translations$sync$zh {
 	@override String remoteCount({required Object count}) => 'remote ${count}';
 	@override String get logHealth => 'Connection';
 	@override String lastSuccess({required Object time}) => 'last success ${time}';
+	@override String get kindTagSkip => 'Tag skipped';
+	@override String get kindTagTombstonePush => 'Tag deletion pushed';
 }
 
 // Path: ui

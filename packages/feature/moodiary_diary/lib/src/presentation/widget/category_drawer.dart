@@ -181,6 +181,18 @@ class _CategoryDrawerState extends ConsumerState<CategoryDrawer> {
                       ),
                       const SizedBox(width: 8),
                       IconButton.filledTonal(
+                        tooltip: context.l10n.diary.tagManageEntry,
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                          const TagManagerRoute().push(context);
+                        },
+                        icon: const Icon(LucideIcons.tags, size: 20),
+                        style: IconButton.styleFrom(
+                          minimumSize: const Size(48, 44),
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      IconButton.filledTonal(
                         tooltip: context.l10n.app.homeNavigatorSetting,
                         onPressed: () {
                           Navigator.of(context).pop();

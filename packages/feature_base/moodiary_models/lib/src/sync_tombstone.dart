@@ -16,10 +16,12 @@ abstract class SyncTombstone with _$SyncTombstone {
   static const String diaryPrefix = 'd:';
   static const String categoryPrefix = 'c:';
   static const String placePrefix = 'p:';
+  static const String tagPrefix = 't:';
 
   static String diaryKey(String diaryId) => '$diaryPrefix$diaryId';
   static String categoryKey(String categoryId) => '$categoryPrefix$categoryId';
   static String placeKey(String placeId) => '$placePrefix$placeId';
+  static String tagKey(String tagId) => '$tagPrefix$tagId';
 
   factory SyncTombstone.forDiary(String diaryId, {required DateTime at}) =>
       SyncTombstone(
@@ -44,12 +46,20 @@ abstract class SyncTombstone with _$SyncTombstone {
         pushedBackends: const [],
       );
 
+  factory SyncTombstone.forTag(String tagId, {required DateTime at}) =>
+      SyncTombstone(
+        key: tagKey(tagId),
+        timeMs: at.millisecondsSinceEpoch,
+        pushedBackends: const [],
+      );
+
   TombstoneKind? get kind {
     if (key.length < 2) return null;
     return switch (key.substring(0, 2)) {
       diaryPrefix => .diary,
       categoryPrefix => .category,
       placePrefix => .place,
+      tagPrefix => .tag,
       _ => null,
     };
   }
@@ -60,4 +70,4 @@ abstract class SyncTombstone with _$SyncTombstone {
       _$SyncTombstoneFromJson(json);
 }
 
-enum TombstoneKind { diary, category, place }
+enum TombstoneKind { diary, category, place, tag }

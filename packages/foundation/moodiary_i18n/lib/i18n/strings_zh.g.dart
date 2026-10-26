@@ -94,8 +94,8 @@ class Translations$app$zh {
 	/// zh: '新建日记'
 	String get homePageAddDiaryButton => '新建日记';
 
-	/// zh: '分类已被删除，已切回全部'
-	String get categoryDeletedReset => '分类已被删除，已切回全部';
+	/// zh: '日记本已被删除，已切回全部'
+	String get categoryDeletedReset => '日记本已被删除，已切回全部';
 
 	/// zh: '设置'
 	String get homeNavigatorSetting => '设置';
@@ -121,8 +121,8 @@ class Translations$app$zh {
 	/// zh: '数据同步与备份'
 	String get syncBackup => '数据同步与备份';
 
-	/// zh: '分类管理'
-	String get categoryManager => '分类管理';
+	/// zh: '日记本管理'
+	String get categoryManager => '日记本管理';
 
 	/// zh: '常用地点'
 	String get placeManager => '常用地点';
@@ -370,8 +370,8 @@ class Translations$app$zh {
 	/// zh: '总字数'
 	String get dashWordCount => '总字数';
 
-	/// zh: '分类数'
-	String get dashCategoryCount => '分类数';
+	/// zh: '日记本数'
+	String get dashCategoryCount => '日记本数';
 
 	/// zh: '标签数'
 	String get dashTagCount => '标签数';
@@ -475,8 +475,8 @@ class Translations$app$zh {
 	/// zh: '检查并修复日记的衍生数据'
 	String get repairSubtitle => '检查并修复日记的衍生数据';
 
-	/// zh: '将扫描全部日记，重新生成卡片预览与媒体引用、清理失效分类并重建搜索索引，不会改动日记正文。'
-	String get repairMessage => '将扫描全部日记，重新生成卡片预览与媒体引用、清理失效分类并重建搜索索引，不会改动日记正文。';
+	/// zh: '将扫描全部日记，重新生成卡片预览与媒体引用、清理失效日记本并重建搜索索引，不会改动日记正文。'
+	String get repairMessage => '将扫描全部日记，重新生成卡片预览与媒体引用、清理失效日记本并重建搜索索引，不会改动日记正文。';
 
 	/// zh: '开始修复'
 	String get repairStart => '开始修复';
@@ -502,8 +502,8 @@ class Translations$app$zh {
 	/// zh: '· 媒体引用 {count} 篇'
 	String repairFixedMedia({required Object count}) => '· 媒体引用 ${count} 篇';
 
-	/// zh: '· 失效分类 {count} 篇'
-	String repairFixedOrphan({required Object count}) => '· 失效分类 ${count} 篇';
+	/// zh: '· 失效日记本 {count} 篇'
+	String repairFixedOrphan({required Object count}) => '· 失效日记本 ${count} 篇';
 
 	/// zh: '搜索索引已重建（{count} 篇）。'
 	String repairReindexed({required Object count}) => '搜索索引已重建（${count} 篇）。';
@@ -838,8 +838,8 @@ class Translations$assistant$zh {
 	/// zh: '查找日记'
 	String get toolSearchTitle => '查找日记';
 
-	/// zh: '按关键词或含义查找你的本地日记，也能按时间范围和分类浏览。语义检索需先在设置中启用本地索引。'
-	String get toolSearchDes => '按关键词或含义查找你的本地日记，也能按时间范围和分类浏览。语义检索需先在设置中启用本地索引。';
+	/// zh: '按关键词或含义查找你的本地日记，也能按时间范围和日记本浏览。语义检索需先在设置中启用本地索引。'
+	String get toolSearchDes => '按关键词或含义查找你的本地日记，也能按时间范围和日记本浏览。语义检索需先在设置中启用本地索引。';
 
 	/// zh: '读取日记全文'
 	String get toolGetTitle => '读取日记全文';
@@ -850,8 +850,8 @@ class Translations$assistant$zh {
 	/// zh: '日记概览'
 	String get toolOverviewTitle => '日记概览';
 
-	/// zh: '统计日记总数、各分类篇数与时间跨度。'
-	String get toolOverviewDes => '统计日记总数、各分类篇数与时间跨度。';
+	/// zh: '统计日记总数、各日记本篇数与时间跨度。'
+	String get toolOverviewDes => '统计日记总数、各日记本篇数与时间跨度。';
 
 	/// zh: '创建日记'
 	String get toolCreateTitle => '创建日记';
@@ -871,29 +871,29 @@ class Translations$assistant$zh {
 	/// zh: '把指定日记移入回收站（可在回收站恢复），可一次删多篇。'
 	String get toolDeleteDes => '把指定日记移入回收站（可在回收站恢复），可一次删多篇。';
 
-	/// zh: '查看分类'
-	String get toolListCategoriesTitle => '查看分类';
+	/// zh: '查看日记本'
+	String get toolListCategoriesTitle => '查看日记本';
 
-	/// zh: '列出你的全部日记分类。'
-	String get toolListCategoriesDes => '列出你的全部日记分类。';
+	/// zh: '列出你的全部日记日记本。'
+	String get toolListCategoriesDes => '列出你的全部日记日记本。';
 
-	/// zh: '创建分类'
-	String get toolCreateCategoryTitle => '创建分类';
+	/// zh: '创建日记本'
+	String get toolCreateCategoryTitle => '创建日记本';
 
-	/// zh: '新建日记分类。'
-	String get toolCreateCategoryDes => '新建日记分类。';
+	/// zh: '新建日记日记本。'
+	String get toolCreateCategoryDes => '新建日记日记本。';
 
-	/// zh: '重命名分类'
-	String get toolUpdateCategoryTitle => '重命名分类';
+	/// zh: '重命名日记本'
+	String get toolUpdateCategoryTitle => '重命名日记本';
 
-	/// zh: '修改分类的名称。'
-	String get toolUpdateCategoryDes => '修改分类的名称。';
+	/// zh: '修改日记本的名称。'
+	String get toolUpdateCategoryDes => '修改日记本的名称。';
 
-	/// zh: '删除分类'
-	String get toolDeleteCategoryTitle => '删除分类';
+	/// zh: '删除日记本'
+	String get toolDeleteCategoryTitle => '删除日记本';
 
-	/// zh: '删除分类（仅当其下没有日记时）。'
-	String get toolDeleteCategoryDes => '删除分类（仅当其下没有日记时）。';
+	/// zh: '删除日记本（仅当其下没有日记时）。'
+	String get toolDeleteCategoryDes => '删除日记本（仅当其下没有日记时）。';
 
 	/// zh: '回忆记忆'
 	String get toolRecallMemoryTitle => '回忆记忆';
@@ -1225,8 +1225,8 @@ class Translations$assistant$zh {
 	/// zh: '标题'
 	String get approvalFieldTitle => '标题';
 
-	/// zh: '分类'
-	String get approvalFieldCategory => '分类';
+	/// zh: '日记本'
+	String get approvalFieldCategory => '日记本';
 
 	/// zh: '正文'
 	String get approvalFieldContent => '正文';
@@ -1234,8 +1234,8 @@ class Translations$assistant$zh {
 	/// zh: '名称'
 	String get approvalFieldName => '名称';
 
-	/// zh: '未分类'
-	String get approvalNoCategory => '未分类';
+	/// zh: '未日记本'
+	String get approvalNoCategory => '未日记本';
 
 	/// zh: '约 {count} 字'
 	String approvalContentNew({required Object count}) => '约 ${count} 字';
@@ -1255,8 +1255,8 @@ class Translations$assistant$zh {
 	/// zh: '{count} 项'
 	String approvalItemCount({required Object count}) => '${count} 项';
 
-	/// zh: '分类改为 {name}'
-	String approvalCategoryTo({required Object name}) => '分类改为 ${name}';
+	/// zh: '日记本改为 {name}'
+	String approvalCategoryTo({required Object name}) => '日记本改为 ${name}';
 
 	/// zh: '还有 {count} 条'
 	String approvalMore({required Object count}) => '还有 ${count} 条';
@@ -1450,8 +1450,8 @@ class Translations$common$zh {
 	/// zh: '视频'
 	String get video => '视频';
 
-	/// zh: '分类'
-	String get category => '分类';
+	/// zh: '日记本'
+	String get category => '日记本';
 
 	/// zh: '名称'
 	String get name => '名称';
@@ -1468,8 +1468,8 @@ class Translations$common$zh {
 	/// zh: '重试'
 	String get retry => '重试';
 
-	/// zh: '{count} 个分类'
-	String categoryCount({required Object count}) => '${count} 个分类';
+	/// zh: '{count} 个日记本'
+	String categoryCount({required Object count}) => '${count} 个日记本';
 
 	/// zh: '文件名'
 	String get fileName => '文件名';
@@ -1504,11 +1504,11 @@ class Translations$diary$zh {
 	/// zh: '视图模式'
 	String get pageViewModeButton => '视图模式';
 
-	/// zh: '无分类'
-	String get categoryNoCategory => '无分类';
+	/// zh: '无日记本'
+	String get categoryNoCategory => '无日记本';
 
-	/// zh: '全部分类'
-	String get allCategories => '全部分类';
+	/// zh: '全部日记本'
+	String get allCategories => '全部日记本';
 
 	/// zh: '全部'
 	String get categoryAll => '全部';
@@ -1648,20 +1648,20 @@ class Translations$diary$zh {
 	/// zh: '这篇日记还没有关联'
 	String get graphNoLocalLinks => '这篇日记还没有关联';
 
-	/// zh: '搜索分类'
-	String get categorySearchHint => '搜索分类';
+	/// zh: '搜索日记本'
+	String get categorySearchHint => '搜索日记本';
 
 	/// zh: '全部日记'
 	String get categoryAllDiary => '全部日记';
 
-	/// zh: '没有匹配的分类'
-	String get categoryNoMatch => '没有匹配的分类';
+	/// zh: '没有匹配的日记本'
+	String get categoryNoMatch => '没有匹配的日记本';
 
-	/// zh: '正在同步分类…'
-	String get categorySyncingPlaceholder => '正在同步分类…';
+	/// zh: '正在同步日记本…'
+	String get categorySyncingPlaceholder => '正在同步日记本…';
 
-	/// zh: '管理分类'
-	String get categoryManageEntry => '管理分类';
+	/// zh: '管理日记本'
+	String get categoryManageEntry => '管理日记本';
 
 	/// zh: '排序'
 	String get sortTitle => '排序';
@@ -1683,8 +1683,8 @@ class Translations$diary$zh {
 	/// zh: '近 7 天'
 	String get rangeLast7 => '近 7 天';
 
-	/// zh: '分类管理'
-	String get categoryManagerTitle => '分类管理';
+	/// zh: '日记本管理'
+	String get categoryManagerTitle => '日记本管理';
 
 	/// zh: '已创建「{name}」'
 	String categoryCreated({required Object name}) => '已创建「${name}」';
@@ -1698,8 +1698,8 @@ class Translations$diary$zh {
 	/// zh: '重命名失败'
 	String get categoryRenameFailed => '重命名失败';
 
-	/// zh: '删除分类？'
-	String get categoryDeleteTitle => '删除分类？';
+	/// zh: '删除日记本？'
+	String get categoryDeleteTitle => '删除日记本？';
 
 	/// zh: '「{name}」下仍有日记（含回收站）时不可删除，日记本身不受影响。'
 	String categoryDeleteMessage({required Object name}) => '「${name}」下仍有日记（含回收站）时不可删除，日记本身不受影响。';
@@ -1710,11 +1710,11 @@ class Translations$diary$zh {
 	/// zh: '仍有日记（含回收站），无法删除'
 	String get categoryDeleteBlocked => '仍有日记（含回收站），无法删除';
 
-	/// zh: '暂无分类'
-	String get categoryEmpty => '暂无分类';
+	/// zh: '暂无日记本'
+	String get categoryEmpty => '暂无日记本';
 
-	/// zh: '新建分类'
-	String get categoryNew => '新建分类';
+	/// zh: '新建日记本'
+	String get categoryNew => '新建日记本';
 
 	/// zh: '{count} 篇日记'
 	String categoryDiaryCount({required Object count}) => '${count} 篇日记';
@@ -1725,11 +1725,11 @@ class Translations$diary$zh {
 	/// zh: '重命名'
 	String get rename => '重命名';
 
-	/// zh: '分类名称'
-	String get categoryNameHint => '分类名称';
+	/// zh: '日记本名称'
+	String get categoryNameHint => '日记本名称';
 
-	/// zh: '分类名称不能为空'
-	String get categoryNameEmpty => '分类名称不能为空';
+	/// zh: '日记本名称不能为空'
+	String get categoryNameEmpty => '日记本名称不能为空';
 
 	/// zh: '回收站'
 	String get recycleTitle => '回收站';
@@ -1839,8 +1839,8 @@ class Translations$diary$zh {
 	/// zh: '添加标签'
 	String get addTag => '添加标签';
 
-	/// zh: '标签名'
-	String get tagNameHint => '标签名';
+	/// zh: '标签名称'
+	String get tagNameHint => '标签名称';
 
 	/// zh: '添加'
 	String get add => '添加';
@@ -1995,8 +1995,8 @@ class Translations$diary$zh {
 	/// zh: '保存失败'
 	String get saveFailed => '保存失败';
 
-	/// zh: '未知分类'
-	String get unknownCategory => '未知分类';
+	/// zh: '未知日记本'
+	String get unknownCategory => '未知日记本';
 
 	/// zh: '加载中…'
 	String get loading => '加载中…';
@@ -2021,6 +2021,45 @@ class Translations$diary$zh {
 
 	/// zh: '月视图'
 	String get calendarMonthView => '月视图';
+
+	/// zh: '标签管理'
+	String get tagManagerTitle => '标签管理';
+
+	/// zh: '管理标签'
+	String get tagManageEntry => '管理标签';
+
+	/// zh: '新建标签'
+	String get tagNew => '新建标签';
+
+	/// zh: '暂无标签'
+	String get tagEmpty => '暂无标签';
+
+	/// zh: '标签名称不能为空'
+	String get tagNameEmpty => '标签名称不能为空';
+
+	/// zh: '删除标签？'
+	String get tagDeleteTitle => '删除标签？';
+
+	/// zh: '有日记或子标签在使用，无法删除'
+	String get tagDeleteBlocked => '有日记或子标签在使用，无法删除';
+
+	/// zh: '创建失败'
+	String get tagCreateFailed => '创建失败';
+
+	/// zh: '选择标签'
+	String get tagSelectTitle => '选择标签';
+
+	/// zh: '在「{name}」下新建'
+	String tagNewUnder({required Object name}) => '在「${name}」下新建';
+
+	/// zh: '（顶级）'
+	String get tagNoParent => '（顶级）';
+
+	/// zh: '重命名'
+	String get tagRename => '重命名';
+
+	/// zh: '设置父级'
+	String get tagSetParent => '设置父级';
 }
 
 // Path: editor
@@ -2040,11 +2079,11 @@ class Translations$editor$zh {
 	/// zh: '编辑器加载失败 {error}'
 	String loadFailed({required Object error}) => '编辑器加载失败\n${error}';
 
-	/// zh: '选择分类'
-	String get pickCategory => '选择分类';
+	/// zh: '选择日记本'
+	String get pickCategory => '选择日记本';
 
-	/// zh: '不分类'
-	String get noCategory => '不分类';
+	/// zh: '无日记本'
+	String get noCategory => '无日记本';
 
 	/// zh: '升级数据迁移'
 	String get migrationTitle => '升级数据迁移';
@@ -2055,8 +2094,8 @@ class Translations$editor$zh {
 	/// zh: '数据库引擎升级'
 	String get migrationStepEngine => '数据库引擎升级';
 
-	/// zh: '日记、分类、字体等全部数据搬入新数据库'
-	String get migrationStepEngineDesc => '日记、分类、字体等全部数据搬入新数据库';
+	/// zh: '日记、日记本、字体等全部数据搬入新数据库'
+	String get migrationStepEngineDesc => '日记、日记本、字体等全部数据搬入新数据库';
 
 	/// zh: '日记格式转换'
 	String get migrationStepEditor => '日记格式转换';
@@ -2139,8 +2178,8 @@ class Translations$editor$zh {
 	/// zh: '{count} 篇'
 	String migrationSummaryDiariesCount({required Object count}) => '${count} 篇';
 
-	/// zh: '分类'
-	String get migrationSummaryCategories => '分类';
+	/// zh: '日记本'
+	String get migrationSummaryCategories => '日记本';
 
 	/// zh: '{count} 个'
 	String migrationSummaryCategoriesCount({required Object count}) => '${count} 个';
@@ -2204,8 +2243,8 @@ class Translations$export$zh {
 	/// zh: '恢复完成：{summary}'
 	String restoreDone({required Object summary}) => '恢复完成：${summary}';
 
-	/// zh: '日记 {diary} 条 / 分类 {category} 条 / 媒体 {media} 个'
-	String restoreSummary({required Object diary, required Object category, required Object media}) => '日记 ${diary} 条 / 分类 ${category} 条 / 媒体 ${media} 个';
+	/// zh: '日记 {diary} 条 / 日记本 {category} 条 / 媒体 {media} 个'
+	String restoreSummary({required Object diary, required Object category, required Object media}) => '日记 ${diary} 条 / 日记本 ${category} 条 / 媒体 ${media} 个';
 
 	/// zh: '{base}，跳过 {skipped} 条（本机内容更新）'
 	String restoreSummarySkipped({required Object base, required Object skipped}) => '${base}，跳过 ${skipped} 条（本机内容更新）';
@@ -2354,8 +2393,8 @@ class Translations$export$zh {
 	/// zh: '全部日记'
 	String get scopeAll => '全部日记';
 
-	/// zh: '按分类'
-	String get scopeByCategory => '按分类';
+	/// zh: '按日记本'
+	String get scopeByCategory => '按日记本';
 
 	/// zh: '按时间'
 	String get scopeByDate => '按时间';
@@ -2384,11 +2423,11 @@ class Translations$export$zh {
 	/// zh: '确定'
 	String get confirm => '确定';
 
-	/// zh: '未分类'
-	String get uncategorized => '未分类';
+	/// zh: '未日记本'
+	String get uncategorized => '未日记本';
 
-	/// zh: '已删除分类'
-	String get deletedCategory => '已删除分类';
+	/// zh: '已删除日记本'
+	String get deletedCategory => '已删除日记本';
 
 	/// zh: 'PDF 字体'
 	String get pdfFontPageTitle => 'PDF 字体';
@@ -2513,8 +2552,8 @@ class Translations$export$zh {
 	/// zh: '图片、视频、音频放在 assets/ 目录（可再分子目录），正文里用相对路径引用。'
 	String get importSpecAssets => '图片、视频、音频放在 assets/ 目录（可再分子目录），正文里用相对路径引用。';
 
-	/// zh: '文件开头可选 front matter，记录标题、时间、心情、分类、标签、天气、位置。没有时标题取正文的第一个一级标题或文件名，时间取文件名开头的日期。'
-	String get importSpecFrontMatter => '文件开头可选 front matter，记录标题、时间、心情、分类、标签、天气、位置。没有时标题取正文的第一个一级标题或文件名，时间取文件名开头的日期。';
+	/// zh: '文件开头可选 front matter，记录标题、时间、心情、日记本、标签、天气、位置。没有时标题取正文的第一个一级标题或文件名，时间取文件名开头的日期。'
+	String get importSpecFrontMatter => '文件开头可选 front matter，记录标题、时间、心情、日记本、标签、天气、位置。没有时标题取正文的第一个一级标题或文件名，时间取文件名开头的日期。';
 
 	/// zh: '本应用「不合并」导出的 Markdown 可以直接导回；合并成一个文件的不支持。'
 	String get importSpecRoundTrip => '本应用「不合并」导出的 Markdown 可以直接导回；合并成一个文件的不支持。';
@@ -2528,8 +2567,8 @@ class Translations$export$zh {
 	/// zh: '正在导入 {done}/{total}'
 	String importProgress({required Object done, required Object total}) => '正在导入 ${done}/${total}';
 
-	/// zh: '日记 {diary} 篇 / 新建分类 {category} 个 / 新建地点 {place} 个'
-	String importSummary({required Object diary, required Object category, required Object place}) => '日记 ${diary} 篇 / 新建分类 ${category} 个 / 新建地点 ${place} 个';
+	/// zh: '日记 {diary} 篇 / 新建日记本 {category} 个 / 新建地点 {place} 个'
+	String importSummary({required Object diary, required Object category, required Object place}) => '日记 ${diary} 篇 / 新建日记本 ${category} 个 / 新建地点 ${place} 个';
 
 	/// zh: '{base}，跳过 {skipped} 篇（已存在）'
 	String importSummarySkipped({required Object base, required Object skipped}) => '${base}，跳过 ${skipped} 篇（已存在）';
@@ -3100,20 +3139,20 @@ class Translations$sync$zh {
 	/// zh: '同步日记删除'
 	String get kindDiaryTombstonePull => '同步日记删除';
 
-	/// zh: '上传分类'
-	String get kindCategoryUpload => '上传分类';
+	/// zh: '上传日记本'
+	String get kindCategoryUpload => '上传日记本';
 
-	/// zh: '下载分类'
-	String get kindCategoryDownload => '下载分类';
+	/// zh: '下载日记本'
+	String get kindCategoryDownload => '下载日记本';
 
-	/// zh: '跳过分类'
-	String get kindCategorySkip => '跳过分类';
+	/// zh: '跳过日记本'
+	String get kindCategorySkip => '跳过日记本';
 
-	/// zh: '推送分类删除'
-	String get kindCategoryTombstonePush => '推送分类删除';
+	/// zh: '推送日记本删除'
+	String get kindCategoryTombstonePush => '推送日记本删除';
 
-	/// zh: '同步分类删除'
-	String get kindCategoryTombstonePull => '同步分类删除';
+	/// zh: '同步日记本删除'
+	String get kindCategoryTombstonePull => '同步日记本删除';
 
 	/// zh: '地点上传'
 	String get kindPlaceUpload => '地点上传';
@@ -3259,8 +3298,8 @@ class Translations$sync$zh {
 	/// zh: '日记'
 	String get rowDiary => '日记';
 
-	/// zh: '分类'
-	String get rowCategory => '分类';
+	/// zh: '日记本'
+	String get rowCategory => '日记本';
 
 	/// zh: '媒体'
 	String get rowMedia => '媒体';
@@ -3337,8 +3376,8 @@ class Translations$sync$zh {
 	/// zh: '内容已是最新，没有变更'
 	String get lanUpToDate => '内容已是最新，没有变更';
 
-	/// zh: '日记 {diary} 条 · 分类 {category} 条'
-	String lanReceived({required Object diary, required Object category}) => '日记 ${diary} 条 · 分类 ${category} 条';
+	/// zh: '日记 {diary} 条 · 日记本 {category} 条'
+	String lanReceived({required Object diary, required Object category}) => '日记 ${diary} 条 · 日记本 ${category} 条';
 
 	/// zh: '{base}（{failed} 条失败）'
 	String lanReceivedFailed({required Object base, required Object failed}) => '${base}（${failed} 条失败）';
@@ -3433,8 +3472,8 @@ class Translations$sync$zh {
 	/// zh: '加密云端数据？'
 	String get keyEncryptCloudTitle => '加密云端数据？';
 
-	/// zh: '云端已有的日记、分类与媒体将被加密，密钥由你的密码保护。'
-	String get keyEncryptCloudMessage => '云端已有的日记、分类与媒体将被加密，密钥由你的密码保护。';
+	/// zh: '云端已有的日记、日记本与媒体将被加密，密钥由你的密码保护。'
+	String get keyEncryptCloudMessage => '云端已有的日记、日记本与媒体将被加密，密钥由你的密码保护。';
 
 	/// zh: '继续'
 	String get keyContinue => '继续';
@@ -3703,8 +3742,8 @@ class Translations$sync$zh {
 	/// zh: '{count} 条失败'
 	String warnFailedCount({required Object count}) => '${count} 条失败';
 
-	/// zh: '日记 {diary} + 分类 {category} + 媒体 {media}（耗时 {ms}ms）'
-	String reCipherSummary({required Object diary, required Object category, required Object media, required Object ms}) => '日记 ${diary} + 分类 ${category} + 媒体 ${media}（耗时 ${ms}ms）';
+	/// zh: '日记 {diary} + 日记本 {category} + 媒体 {media}（耗时 {ms}ms）'
+	String reCipherSummary({required Object diary, required Object category, required Object media, required Object ms}) => '日记 ${diary} + 日记本 ${category} + 媒体 ${media}（耗时 ${ms}ms）';
 
 	/// zh: '{base} {failed} 个对象失败已跳过'
 	String reCipherFailedSuffix({required Object base, required Object failed}) => '${base}\n${failed} 个对象失败已跳过';
@@ -3715,8 +3754,8 @@ class Translations$sync$zh {
 	/// zh: '日记 {id}'
 	String stepDiary({required Object id}) => '日记 ${id}';
 
-	/// zh: '分类 {id}'
-	String stepCategory({required Object id}) => '分类 ${id}';
+	/// zh: '日记本 {id}'
+	String stepCategory({required Object id}) => '日记本 ${id}';
 
 	/// zh: '地点 {id}'
 	String stepPlace({required Object id}) => '地点 ${id}';
@@ -3739,14 +3778,14 @@ class Translations$sync$zh {
 	/// zh: '上传 {count} 篇日记'
 	String summaryUploadedDiaries({required Object count}) => '上传 ${count} 篇日记';
 
-	/// zh: '上传 {count} 个分类'
-	String summaryUploadedCategories({required Object count}) => '上传 ${count} 个分类';
+	/// zh: '上传 {count} 个日记本'
+	String summaryUploadedCategories({required Object count}) => '上传 ${count} 个日记本';
 
 	/// zh: '下载 {count} 篇日记'
 	String summaryDownloadedDiaries({required Object count}) => '下载 ${count} 篇日记';
 
-	/// zh: '下载 {count} 个分类'
-	String summaryDownloadedCategories({required Object count}) => '下载 ${count} 个分类';
+	/// zh: '下载 {count} 个日记本'
+	String summaryDownloadedCategories({required Object count}) => '下载 ${count} 个日记本';
 
 	/// zh: '媒体 {count} 个'
 	String summaryMedia({required Object count}) => '媒体 ${count} 个';
@@ -3870,6 +3909,12 @@ class Translations$sync$zh {
 
 	/// zh: '上次成功 {time}'
 	String lastSuccess({required Object time}) => '上次成功 ${time}';
+
+	/// zh: '标签跳过'
+	String get kindTagSkip => '标签跳过';
+
+	/// zh: '标签删除推送'
+	String get kindTagTombstonePush => '标签删除推送';
 }
 
 // Path: ui

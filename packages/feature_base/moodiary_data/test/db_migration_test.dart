@@ -11,6 +11,7 @@ import 'package:sqlite3_simple/sqlite3_simple.dart';
 import 'drift/moodiary/generated/schema.dart';
 import 'drift/moodiary/generated/schema_v1.dart' as v1;
 import 'drift/moodiary/generated/schema_v2.dart' as v2;
+import 'drift/moodiary/generated/schema_v3.dart' as v3;
 
 String marked(String word) => '$searchHitStart$word$searchHitEnd';
 
@@ -294,5 +295,43 @@ void main() {
         await db.close();
       });
     }
+  });
+
+  test('v3 老库升级：既有扁平标签按名去重种入 tags，全部顶级', () async {
+    final schema = await verifier.schemaAt(3);
+    final old = v3.DatabaseAtV3(schema.newConnection());
+    await old
+        .into(old.diaries)
+        .insert(
+          v3.DiariesCompanion.insert(
+            id: 'd1',
+            title: 't',
+            content: '',
+            contentText: '',
+            time: 0,
+            lastModified: 0,
+            show: 1,
+            mood: 'neutral',
+            type: 'tiptap',
+          ),
+        );
+    for (final (i, name) in ['工作', '生活', '工作', '心情'].indexed) {
+      await old
+          .into(old.diaryTags)
+          .insert(v3.DiaryTagsCompanion.insert(diaryId: 'd1', seq: i, tag: name));
+    }
+    await old.close();
+
+    final db = MoodiaryDatabase.forTesting(schema.newConnection());
+    await verifier.migrateAndValidate(db, 4);
+    final tags = await db
+        .customSelect('SELECT name, parent_id FROM tags ORDER BY name')
+        .get();
+    expect(tags.map((r) => r.read<String>('name')), ['工作', '心情', '生活']);
+    expect(
+      tags.map((r) => r.readNullable<String>('parent_id')),
+      everyElement(isNull),
+    );
+    await db.close();
   });
 }

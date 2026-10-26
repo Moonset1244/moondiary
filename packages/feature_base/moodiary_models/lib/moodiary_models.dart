@@ -24,5 +24,7 @@ export 'src/place_event.dart';
 export 'src/reasoning_control.dart';
 export 'src/search.dart';
 export 'src/sync_tombstone.dart';
+export 'src/tag.dart';
+export 'src/tag_event.dart';
 export 'src/utc_date_time_converter.dart';
 export 'src/view_mode.dart';

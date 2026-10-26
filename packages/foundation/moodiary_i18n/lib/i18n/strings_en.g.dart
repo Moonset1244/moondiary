@@ -225,6 +225,16 @@ class _Translations$app$en extends Translations$app$zh {
 	@override String get fontExists => 'That font is already installed';
 	@override String get routeErrorTitle => 'Page not found';
 	@override String get routeErrorBackHome => 'Back to home';
+	@override String get diaryPrefsDefault => 'Defaults';
+	@override String get defaultCategory => 'Default notebook';
+	@override String get defaultTags => 'Default tags';
+	@override String get defaultNone => 'None';
+	@override String get autoTitle => 'Auto title';
+	@override String get autoTitleNone => 'Off';
+	@override String get autoTitleFirstSentence => 'First sentence';
+	@override String get autoTitleDateTime => 'Date & time';
+	@override String get autoTitleTemplate => 'Custom template';
+	@override String get autoTitleTemplateHint => 'Template supports yyyy MM dd HH mm ss and the first placeholder';
 }
 
 // Path: assistant
@@ -540,7 +550,7 @@ class _Translations$common$en extends Translations$common$zh {
 	@override String categoryCount({required Object count}) => '${count} notebooks';
 	@override String get fileName => 'File name';
 	@override String get close => 'Close';
-	@override String get appName => 'Moodiary';
+	@override String get appName => 'Moondiary';
 	@override String get configured => 'Configured';
 	@override String get notConfigured => 'Not configured';
 	@override String get copied => 'Copied to clipboard';
@@ -743,6 +753,7 @@ class _Translations$diary$en extends Translations$diary$zh {
 	@override String get tagNoParent => '(top level)';
 	@override String get tagRename => 'Rename';
 	@override String get tagSetParent => 'Set parent';
+	@override String get tagSection => 'Tags';
 }
 
 // Path: editor

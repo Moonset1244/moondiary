@@ -1,4 +1,4 @@
-package cn.yooss.moodiary
+package cn.moonset.moondiary
 
 import android.media.MediaCodecList
 import android.os.Build

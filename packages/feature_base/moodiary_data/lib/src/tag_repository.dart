@@ -15,7 +15,8 @@ class TagRepository {
 
   final MoodiaryDatabase _db;
 
-  final StreamController<TagEvent> _events = StreamController<TagEvent>.broadcast();
+  final StreamController<TagEvent> _events =
+      StreamController<TagEvent>.broadcast();
 
   Stream<TagEvent> get tagEvents => _events.stream;
 
@@ -27,14 +28,13 @@ class TagRepository {
     color: r.color,
   );
 
-  static TagsCompanion _toCompanion(Tag t) =>
-      TagsCompanion.insert(
-        id: t.id,
-        name: t.name,
-        lastModified: dbTime(t.lastModified),
-        parentId: Value(t.parentId),
-        color: Value(t.color),
-      );
+  static TagsCompanion _toCompanion(Tag t) => TagsCompanion.insert(
+    id: t.id,
+    name: t.name,
+    lastModified: dbTime(t.lastModified),
+    parentId: Value(t.parentId),
+    color: Value(t.color),
+  );
 
   Future<List<Tag>> getAllTags() async {
     final rows = await (_db.select(
@@ -76,20 +76,19 @@ class TagRepository {
       if (row == null || row.name == newName) return false;
       final clash = await (_db.select(
         _db.tags,
-      )..where((t) => t.name.equals(newName)))
-          .getSingleOrNull();
+      )..where((t) => t.name.equals(newName))).getSingleOrNull();
       if (clash != null) return false;
-      await (_db.update(_db.tags)
-            ..where((t) => t.id.equals(id)))
-          .write(TagsCompanion(
-        name: Value(newName),
-        lastModified: Value(dbTime(.timestamp())),
-      ));
-      // diary_tags 按名字关联，同事务内同步改名（参数化语句防注入）
-      await _db.customStatement(
-        'UPDATE diary_tags SET tag = ? WHERE tag = ?',
-        [newName, row.name],
+      await (_db.update(_db.tags)..where((t) => t.id.equals(id))).write(
+        TagsCompanion(
+          name: Value(newName),
+          lastModified: Value(dbTime(.timestamp())),
+        ),
       );
+      // diary_tags 按名字关联，同事务内同步改名（参数化语句防注入）
+      await _db.customStatement('UPDATE diary_tags SET tag = ? WHERE tag = ?', [
+        newName,
+        row.name,
+      ]);
       return true;
     });
     if (updated) {
@@ -121,13 +120,15 @@ class TagRepository {
           null;
       if (hasChild) return false;
       await (_db.delete(_db.tags)..where((t) => t.id.equals(id))).go();
-      await _db.into(_db.tombstones).insertOnConflictUpdate(
-        TombstonesCompanion.insert(
-          key: SyncTombstone.tagKey(id),
-          timeMs: SyncTombstone.forTag(id, at: .timestamp()).timeMs,
-          pushedBackendsJson: const Value('[]'),
-        ),
-      );
+      await _db
+          .into(_db.tombstones)
+          .insertOnConflictUpdate(
+            TombstonesCompanion.insert(
+              key: SyncTombstone.tagKey(id),
+              timeMs: SyncTombstone.forTag(id, at: .timestamp()).timeMs,
+              pushedBackendsJson: const Value('[]'),
+            ),
+          );
       return true;
     });
     if (deleted) _events.add(TagDeleted(id));

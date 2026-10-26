@@ -168,5 +168,15 @@
   "fontNameFailed": "Could not read the font name",
   "fontExists": "That font is already installed",
   "routeErrorTitle": "Page not found",
-  "routeErrorBackHome": "Back to home"
+  "routeErrorBackHome": "Back to home",
+  "diaryPrefsDefault": "Defaults",
+  "defaultCategory": "Default notebook",
+  "defaultTags": "Default tags",
+  "defaultNone": "None",
+  "autoTitle": "Auto title",
+  "autoTitleNone": "Off",
+  "autoTitleFirstSentence": "First sentence",
+  "autoTitleDateTime": "Date & time",
+  "autoTitleTemplate": "Custom template",
+  "autoTitleTemplateHint": "Template supports yyyy MM dd HH mm ss and the first placeholder"
 }

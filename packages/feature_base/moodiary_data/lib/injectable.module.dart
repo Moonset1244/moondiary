@@ -21,28 +21,36 @@ import 'package:moodiary_data/src/tombstone_repository.dart' as _i952;
 import 'package:moodiary_ml/moodiary_ml.dart' as _i611;
 
 class MoodiaryDataPackageModule extends _i526.MicroPackageModule {
-// initializes the registration of main-scope dependencies inside of GetIt
+  // initializes the registration of main-scope dependencies inside of GetIt
   @override
   _i687.FutureOr<void> init(_i526.GetItHelper gh) {
     gh.singleton<_i107.OpenDiaryRegistry>(() => _i107.OpenDiaryRegistry());
     gh.singleton<_i931.SyncPendingTracker>(() => _i931.SyncPendingTracker());
     gh.singleton<_i931.SyncDirtyTracker>(() => _i931.SyncDirtyTracker());
-    gh.lazySingleton<_i768.EmbedIndexService>(() => _i768.EmbedIndexService(
-          gh<_i527.MoodiaryDatabase>(),
-          gh<_i611.SemanticEmbedder>(),
-        ));
+    gh.lazySingleton<_i768.EmbedIndexService>(
+      () => _i768.EmbedIndexService(
+        gh<_i527.MoodiaryDatabase>(),
+        gh<_i611.SemanticEmbedder>(),
+      ),
+    );
     gh.lazySingleton<_i428.CategoryRepository>(
-        () => _i428.CategoryRepository(gh<_i527.MoodiaryDatabase>()));
+      () => _i428.CategoryRepository(gh<_i527.MoodiaryDatabase>()),
+    );
     gh.lazySingleton<_i1068.DiaryRepository>(
-        () => _i1068.DiaryRepository(gh<_i527.MoodiaryDatabase>()));
+      () => _i1068.DiaryRepository(gh<_i527.MoodiaryDatabase>()),
+    );
     gh.lazySingleton<_i377.FontRepository>(
-        () => _i377.FontRepository(gh<_i527.MoodiaryDatabase>()));
+      () => _i377.FontRepository(gh<_i527.MoodiaryDatabase>()),
+    );
     gh.lazySingleton<_i925.PlaceRepository>(
-        () => _i925.PlaceRepository(gh<_i527.MoodiaryDatabase>()));
+      () => _i925.PlaceRepository(gh<_i527.MoodiaryDatabase>()),
+    );
     gh.lazySingleton<_i521.TagRepository>(
-        () => _i521.TagRepository(gh<_i527.MoodiaryDatabase>()));
+      () => _i521.TagRepository(gh<_i527.MoodiaryDatabase>()),
+    );
     gh.lazySingleton<_i952.TombstoneRepository>(
-        () => _i952.TombstoneRepository(gh<_i527.MoodiaryDatabase>()));
+      () => _i952.TombstoneRepository(gh<_i527.MoodiaryDatabase>()),
+    );
     gh.lazySingleton<_i135.EmbedQueueWatcher>(
       () => _i135.EmbedQueueWatcher(
         gh<_i1068.DiaryRepository>(),

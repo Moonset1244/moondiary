@@ -16,7 +16,12 @@ final class EditControllerProvider
     extends $AsyncNotifierProvider<EditController, Diary> {
   EditControllerProvider._({
     required EditControllerFamily super.from,
-    required (String?, {DiaryType? defaultType, String? defaultCategoryId})
+    required (
+      String?, {
+      DiaryType? defaultType,
+      String? defaultCategoryId,
+      List<String>? defaultTags,
+    })
     super.argument,
   }) : super(
          retry: null,
@@ -51,7 +56,7 @@ final class EditControllerProvider
   }
 }
 
-String _$editControllerHash() => r'db02792bd862df85e05d0b3f108cdf35d2e9c34d';
+String _$editControllerHash() => r'4754059c8b1d6e1dd1fdfb3d35384f28605b273b';
 
 final class EditControllerFamily extends $Family
     with
@@ -60,7 +65,12 @@ final class EditControllerFamily extends $Family
           AsyncValue<Diary>,
           Diary,
           FutureOr<Diary>,
-          (String?, {DiaryType? defaultType, String? defaultCategoryId})
+          (
+            String?, {
+            DiaryType? defaultType,
+            String? defaultCategoryId,
+            List<String>? defaultTags,
+          })
         > {
   EditControllerFamily._()
     : super(
@@ -75,11 +85,13 @@ final class EditControllerFamily extends $Family
     String? diaryId, {
     DiaryType? defaultType,
     String? defaultCategoryId,
+    List<String>? defaultTags,
   }) => EditControllerProvider._(
     argument: (
       diaryId,
       defaultType: defaultType,
       defaultCategoryId: defaultCategoryId,
+      defaultTags: defaultTags,
     ),
     from: this,
   );
@@ -91,15 +103,22 @@ final class EditControllerFamily extends $Family
 abstract class _$EditController extends $AsyncNotifier<Diary> {
   late final _$args =
       ref.$arg
-          as (String?, {DiaryType? defaultType, String? defaultCategoryId});
+          as (
+            String?, {
+            DiaryType? defaultType,
+            String? defaultCategoryId,
+            List<String>? defaultTags,
+          });
   String? get diaryId => _$args.$1;
   DiaryType? get defaultType => _$args.defaultType;
   String? get defaultCategoryId => _$args.defaultCategoryId;
+  List<String>? get defaultTags => _$args.defaultTags;
 
   FutureOr<Diary> build(
     String? diaryId, {
     DiaryType? defaultType,
     String? defaultCategoryId,
+    List<String>? defaultTags,
   });
   @$mustCallSuper
   @override
@@ -119,6 +138,7 @@ abstract class _$EditController extends $AsyncNotifier<Diary> {
         _$args.$1,
         defaultType: _$args.defaultType,
         defaultCategoryId: _$args.defaultCategoryId,
+        defaultTags: _$args.defaultTags,
       ),
     );
   }

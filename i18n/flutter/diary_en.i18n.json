@@ -188,5 +188,6 @@
   "tagNewUnder": "New under \"{name}\"",
   "tagNoParent": "(top level)",
   "tagRename": "Rename",
-  "tagSetParent": "Set parent"
+  "tagSetParent": "Set parent",
+  "tagSection": "Tags"
 }

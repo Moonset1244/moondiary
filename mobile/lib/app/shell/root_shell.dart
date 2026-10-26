@@ -8,6 +8,7 @@ import 'package:moodiary_mobile/app/home/diary_home_page.dart'
     show DiaryHomePage;
 import 'package:moodiary_mobile/app/me/me_page.dart' show MePage;
 import 'package:moodiary_router/moodiary_router.dart';
+import 'package:moodiary_storage/moodiary_storage.dart' show MoodiaryKVs;
 import 'package:mui/mui.dart';
 
 enum _ShellTab { diary, assistant, me }
@@ -49,10 +50,15 @@ class _MobileRootShellState extends ConsumerState<MobileRootShell> {
   ];
 
   Future<void> _newDiary() async {
-    final categoryId = _tab == .diary
+    final filteredCategory = _tab == .diary
         ? ref.read(homeDiaryFilterProvider).categoryId
         : null;
-    await NewDiaryRoute(categoryId: categoryId).push(context);
+    final defaultCat = MoodiaryKVs.defaultCategoryId.get();
+    final categoryId =
+        filteredCategory ??
+        (defaultCat != null && defaultCat.isNotEmpty ? defaultCat : null);
+    final tags = MoodiaryKVs.defaultTags.get();
+    await NewDiaryRoute(categoryId: categoryId, tags: tags).push(context);
   }
 
   MNavAction _navAction(BuildContext context) {

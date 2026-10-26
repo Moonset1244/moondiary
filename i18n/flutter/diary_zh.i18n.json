@@ -187,5 +187,6 @@
   "tagNewUnder": "在「{name}」下新建",
   "tagNoParent": "（顶级）",
   "tagRename": "重命名",
-  "tagSetParent": "设置父级"
+  "tagSetParent": "设置父级",
+  "tagSection": "标签"
 }

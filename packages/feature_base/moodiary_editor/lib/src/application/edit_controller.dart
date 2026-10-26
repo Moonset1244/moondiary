@@ -4,6 +4,7 @@ import 'package:moodiary_di/moodiary_di.dart';
 import 'package:moodiary_editor/src/data/geo_repository.dart';
 import 'package:moodiary_editor/src/data/weather_repository.dart';
 import 'package:moodiary_models/moodiary_models.dart';
+import 'package:moodiary_storage/moodiary_storage.dart';
 import 'package:mui/mui.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -34,12 +35,14 @@ class EditController extends _$EditController {
     String? diaryId, {
     DiaryType? defaultType,
     String? defaultCategoryId,
+    List<String>? defaultTags,
   }) async {
     final diary = await ref.watch(
       getDiaryProvider(
         id: diaryId,
         defaultType: defaultType,
         defaultCategoryId: defaultCategoryId,
+        defaultTags: defaultTags,
       ).future,
     );
     if (diary == null) throw StateError('Diary not found: $diaryId');
@@ -201,7 +204,11 @@ class EditController extends _$EditController {
   Future<DraftSaveResult> _doAutoSave() async {
     final current = _latest;
     if (current == null) return .saved;
-    final next = touched(withDerivedMedia(current));
+    var next = touched(withDerivedMedia(current));
+    final autoTitle = _generateAutoTitle(next);
+    if (next.title.trim().isEmpty && autoTitle != null) {
+      next = next.copyWith(title: autoTitle);
+    }
     if (_wasNewDraft && _isBlank(next)) {
       try {
         if (_persisted) {
@@ -249,4 +256,51 @@ class EditController extends _$EditController {
       d.audioName.isEmpty &&
       d.videoName.isEmpty &&
       d.fileName.isEmpty;
+
+  // 自动标题：0 关闭 / 1 正文首句 / 2 日期时间 / 3 自定义模板
+  String? _generateAutoTitle(Diary d) {
+    final mode = MoodiaryKVs.autoTitleMode.get() ?? 0;
+    switch (mode) {
+      case 0:
+        return null;
+      case 1:
+        return _firstSentence(d.contentText);
+      case 2:
+        return _fmtDateTime(d.time.toLocal());
+      case 3:
+        return _applyTemplate(d);
+      default:
+        return null;
+    }
+  }
+
+  String? _firstSentence(String contentText) {
+    final text = contentText.trim();
+    if (text.isEmpty) return null;
+    final first = text.split(RegExp(r'[。！？!?.\n]')).first.trim();
+    if (first.isEmpty) return null;
+    return first.length > 40 ? '${first.substring(0, 40)}…' : first;
+  }
+
+  String _fmtDateTime(DateTime t) {
+    String p(int n) => n.toString().padLeft(2, '0');
+    return '${t.year}-${p(t.month)}-${p(t.day)} '
+        '${p(t.hour)}:${p(t.minute)}:${p(t.second)}';
+  }
+
+  String _applyTemplate(Diary d) {
+    final t = d.time.toLocal();
+    String p(int n) => n.toString().padLeft(2, '0');
+    final first = _firstSentence(d.contentText) ?? '';
+    final tpl = MoodiaryKVs.autoTitleTemplate.get() ?? 'yyyy-MM-dd HH:mm:ss';
+    return tpl
+        .replaceAll('yyyy', '${t.year}')
+        .replaceAll('MM', p(t.month))
+        .replaceAll('dd', p(t.day))
+        .replaceAll('HH', p(t.hour))
+        .replaceAll('mm', p(t.minute))
+        .replaceAll('ss', p(t.second))
+        .replaceAll('{first}', first)
+        .replaceAll('{title}', d.title);
+  }
 }

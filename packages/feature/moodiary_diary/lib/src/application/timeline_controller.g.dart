@@ -24,7 +24,12 @@ final class TimelineMonthCountsProvider
         $FutureProvider<Map<DateTime, int>> {
   TimelineMonthCountsProvider._({
     required TimelineMonthCountsFamily super.from,
-    required ({String? categoryId, bool uncategorized, DiarySort sort})
+    required ({
+      String? categoryId,
+      bool uncategorized,
+      String? tag,
+      DiarySort sort,
+    })
     super.argument,
   }) : super(
          retry: null,
@@ -54,11 +59,17 @@ final class TimelineMonthCountsProvider
   FutureOr<Map<DateTime, int>> create(Ref ref) {
     final argument =
         this.argument
-            as ({String? categoryId, bool uncategorized, DiarySort sort});
+            as ({
+              String? categoryId,
+              bool uncategorized,
+              String? tag,
+              DiarySort sort,
+            });
     return timelineMonthCounts(
       ref,
       categoryId: argument.categoryId,
       uncategorized: argument.uncategorized,
+      tag: argument.tag,
       sort: argument.sort,
     );
   }
@@ -75,13 +86,18 @@ final class TimelineMonthCountsProvider
 }
 
 String _$timelineMonthCountsHash() =>
-    r'274bc4691bf8e2f2da8b8e155f0b86761179a5ba';
+    r'2824c1b00f1f2952a5cb208450718964efddbfd2';
 
 final class TimelineMonthCountsFamily extends $Family
     with
         $FunctionalFamilyOverride<
           FutureOr<Map<DateTime, int>>,
-          ({String? categoryId, bool uncategorized, DiarySort sort})
+          ({
+            String? categoryId,
+            bool uncategorized,
+            String? tag,
+            DiarySort sort,
+          })
         > {
   TimelineMonthCountsFamily._()
     : super(
@@ -95,11 +111,13 @@ final class TimelineMonthCountsFamily extends $Family
   TimelineMonthCountsProvider call({
     String? categoryId,
     bool uncategorized = false,
+    String? tag,
     required DiarySort sort,
   }) => TimelineMonthCountsProvider._(
     argument: (
       categoryId: categoryId,
       uncategorized: uncategorized,
+      tag: tag,
       sort: sort,
     ),
     from: this,

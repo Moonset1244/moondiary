@@ -77,10 +77,14 @@ class _TagManagerPageState extends ConsumerState<TagManagerPage> {
     if (draft == null || draft.name.isEmpty) return;
     final ok = await ref
         .read(tagControllerProvider.notifier)
-        .upsertTag(Tag.create(name: draft.name, color: draft.color, parentId: parent));
+        .upsertTag(
+          Tag.create(name: draft.name, color: draft.color, parentId: parent),
+        );
     if (!mounted) return;
     if (ok) {
-      toast.success(message: context.l10n.diary.categoryCreated(name: draft.name));
+      toast.success(
+        message: context.l10n.diary.categoryCreated(name: draft.name),
+      );
     } else {
       toast.error(message: context.l10n.diary.tagCreateFailed);
     }
@@ -106,15 +110,24 @@ class _TagManagerPageState extends ConsumerState<TagManagerPage> {
     if (draft.color != tag.color) {
       await ref
           .read(tagControllerProvider.notifier)
-          .upsertTag(tag.copyWith(color: draft.color, lastModified: DateTime.timestamp()));
+          .upsertTag(
+            tag.copyWith(
+              color: draft.color,
+              lastModified: DateTime.timestamp(),
+            ),
+          );
     }
     if (mounted) {
-      toast.success(message: context.l10n.diary.categoryRenamed(name: draft.name));
+      toast.success(
+        message: context.l10n.diary.categoryRenamed(name: draft.name),
+      );
     }
   }
 
   Future<void> _onReparent(Tag tag, List<Tag> all) async {
-    final candidates = all.where((t) => t.id != tag.id && t.parentId == null).toList();
+    final candidates = all
+        .where((t) => t.id != tag.id && t.parentId == null)
+        .toList();
     const kNone = '__none__';
     final target = await MAlert.show<String>(
       context,
@@ -142,7 +155,9 @@ class _TagManagerPageState extends ConsumerState<TagManagerPage> {
     if (newParent == tag.parentId) return;
     await ref
         .read(tagControllerProvider.notifier)
-        .upsertTag(tag.copyWith(parentId: newParent, lastModified: DateTime.timestamp()));
+        .upsertTag(
+          tag.copyWith(parentId: newParent, lastModified: DateTime.timestamp()),
+        );
   }
 
   Future<void> _onDelete(Tag tag) async {
@@ -202,7 +217,10 @@ class _TagTile extends StatelessWidget {
         ),
         subtitle: trailing == null
             ? null
-            : Text(trailing!, style: context.theme.typography.labelSmall.onSurfaceVariant),
+            : Text(
+                trailing!,
+                style: context.theme.typography.labelSmall.onSurfaceVariant,
+              ),
         trailing: Row(
           mainAxisSize: MainAxisSize.min,
           children: [

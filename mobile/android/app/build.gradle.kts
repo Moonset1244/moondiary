@@ -19,7 +19,7 @@ val hasReleaseSigning = releaseKeystore.isFile &&
     !releaseStorePassword.isNullOrBlank() && !releaseKeyPassword.isNullOrBlank()
 
 android {
-    namespace = "cn.yooss.moodiary"
+    namespace = "cn.moonset.moondiary"
     compileSdk = 36
     ndkVersion = "28.2.13676358"
 
@@ -48,7 +48,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "cn.yooss.moodiary"
+        applicationId = "cn.moonset.moondiary"
         // 28 起才认 DT_ANDROID_RELR；native_toolchain_rust 把 apiTarget 硬编码成 35，26/27 会静默跳过全部重定位
         minSdk = 28
         targetSdk = 36

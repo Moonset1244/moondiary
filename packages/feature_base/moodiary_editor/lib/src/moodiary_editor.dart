@@ -95,6 +95,8 @@ class MoodiaryEditor extends StatefulWidget {
 
   final VoidCallback? onOpenGraph;
 
+  final VoidCallback? onDoubleTapToEdit;
+
   final bool firstLineIndent;
 
   final double fontScale;
@@ -139,6 +141,7 @@ class MoodiaryEditor extends StatefulWidget {
     this.onManagePlaces,
     this.onClearPosition,
     this.onOpenGraph,
+    this.onDoubleTapToEdit,
     this.firstLineIndent = false,
     this.fontScale = 1.0,
     this.rolesResolver,
@@ -519,6 +522,9 @@ class _MoodiaryEditorState extends State<MoodiaryEditor> {
         return;
       case 'openGraph':
         widget.onOpenGraph?.call();
+        return;
+      case 'doubleTapToEdit':
+        widget.onDoubleTapToEdit?.call();
         return;
     }
   }

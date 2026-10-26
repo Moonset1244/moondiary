@@ -52,6 +52,14 @@ enum MoodiaryKVs<T extends Object> {
 
   categoryOrder<List<String>>(),
 
+  defaultCategoryId<String>(defaultValue: ''),
+
+  defaultTags<List<String>>(),
+
+  autoTitleMode<int>(defaultValue: 0),
+
+  autoTitleTemplate<String>(defaultValue: 'yyyy-MM-dd HH:mm:ss'),
+
   exportSettings<String>(defaultValue: ''),
 
   searchHistory<List<String>>(),

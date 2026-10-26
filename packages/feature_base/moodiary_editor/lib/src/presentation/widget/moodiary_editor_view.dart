@@ -57,6 +57,7 @@ class MoodiaryEditorView extends StatefulWidget {
   final VoidCallback? onManagePlaces;
   final VoidCallback? onClearPosition;
   final VoidCallback? onOpenGraph;
+  final VoidCallback? onDoubleTapToEdit;
 
   final Widget? statusBar;
 
@@ -90,6 +91,7 @@ class MoodiaryEditorView extends StatefulWidget {
     this.onManagePlaces,
     this.onClearPosition,
     this.onOpenGraph,
+    this.onDoubleTapToEdit,
     this.statusBar,
   });
 
@@ -350,6 +352,7 @@ class _MoodiaryEditorViewState extends State<MoodiaryEditorView> {
       onManagePlaces: widget.onManagePlaces,
       onClearPosition: widget.onClearPosition,
       onOpenGraph: widget.onOpenGraph,
+      onDoubleTapToEdit: widget.onDoubleTapToEdit,
       firstLineIndent: widget.firstLineIndent,
       fontScale: widget.fontScale,
       rolesResolver: getIt<ThemeManager>().editorRoles,

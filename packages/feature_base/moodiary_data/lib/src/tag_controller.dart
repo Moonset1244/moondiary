@@ -5,6 +5,7 @@ import 'package:moodiary_logging/moodiary_logging.dart';
 import 'package:moodiary_models/moodiary_models.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+import 'diary_repository.dart';
 import 'tag_repository.dart';
 
 part 'tag_controller.g.dart';
@@ -84,4 +85,20 @@ Map<String?, List<Tag>> tagTree(List<Tag> tags) {
     for (final parent in sorted.where((t) => t.parentId == null))
       parent.id: sorted.where((t) => t.parentId == parent.id).toList(),
   };
+}
+
+/// 每个标签名对应的可见日记数（自记侧边栏标签区块）。
+@riverpod
+Future<Map<String, int>> tagDiaryCounts(Ref ref) async {
+  final diaryRepo = getIt<DiaryRepository>();
+  Timer? debounce;
+  final sub = diaryRepo.diaryEvents.listen((_) {
+    debounce?.cancel();
+    debounce = Timer(const Duration(milliseconds: 200), ref.invalidateSelf);
+  });
+  ref.onDispose(() {
+    debounce?.cancel();
+    sub.cancel();
+  });
+  return diaryRepo.diaryCountByTag();
 }

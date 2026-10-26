@@ -567,6 +567,36 @@ class Translations$app$zh {
 
 	/// zh: '返回首页'
 	String get routeErrorBackHome => '返回首页';
+
+	/// zh: '默认值'
+	String get diaryPrefsDefault => '默认值';
+
+	/// zh: '默认日记本'
+	String get defaultCategory => '默认日记本';
+
+	/// zh: '默认标签'
+	String get defaultTags => '默认标签';
+
+	/// zh: '无'
+	String get defaultNone => '无';
+
+	/// zh: '自动标题'
+	String get autoTitle => '自动标题';
+
+	/// zh: '关闭'
+	String get autoTitleNone => '关闭';
+
+	/// zh: '正文首句'
+	String get autoTitleFirstSentence => '正文首句';
+
+	/// zh: '日期时间'
+	String get autoTitleDateTime => '日期时间';
+
+	/// zh: '自定义模板'
+	String get autoTitleTemplate => '自定义模板';
+
+	/// zh: '模板可用 yyyy MM dd HH mm ss 和 first 占位符'
+	String get autoTitleTemplateHint => '模板可用 yyyy MM dd HH mm ss 和 first 占位符';
 }
 
 // Path: assistant
@@ -1477,8 +1507,8 @@ class Translations$common$zh {
 	/// zh: '关闭'
 	String get close => '关闭';
 
-	/// zh: 'Moodiary'
-	String get appName => 'Moodiary';
+	/// zh: '自记'
+	String get appName => '自记';
 
 	/// zh: '已配置'
 	String get configured => '已配置';
@@ -2060,6 +2090,9 @@ class Translations$diary$zh {
 
 	/// zh: '设置父级'
 	String get tagSetParent => '设置父级';
+
+	/// zh: '标签'
+	String get tagSection => '标签';
 }
 
 // Path: editor

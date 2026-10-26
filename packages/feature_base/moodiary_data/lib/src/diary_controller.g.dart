@@ -16,7 +16,8 @@ final class DiaryControllerProvider
     extends $AsyncNotifierProvider<DiaryController, List<Diary>> {
   DiaryControllerProvider._({
     required DiaryControllerFamily super.from,
-    required ({String? categoryId, bool uncategorized}) super.argument,
+    required ({String? categoryId, bool uncategorized, String? tag})
+    super.argument,
   }) : super(
          retry: null,
          name: r'diaryControllerProvider',
@@ -50,7 +51,7 @@ final class DiaryControllerProvider
   }
 }
 
-String _$diaryControllerHash() => r'1ec0634998c20f62d500c52cc888e8bf45feb524';
+String _$diaryControllerHash() => r'6e61fb687ca427dc51cf2e57ba5a57755eff9b64';
 
 final class DiaryControllerFamily extends $Family
     with
@@ -59,7 +60,7 @@ final class DiaryControllerFamily extends $Family
           AsyncValue<List<Diary>>,
           List<Diary>,
           FutureOr<List<Diary>>,
-          ({String? categoryId, bool uncategorized})
+          ({String? categoryId, bool uncategorized, String? tag})
         > {
   DiaryControllerFamily._()
     : super(
@@ -73,8 +74,9 @@ final class DiaryControllerFamily extends $Family
   DiaryControllerProvider call({
     String? categoryId,
     bool uncategorized = false,
+    String? tag,
   }) => DiaryControllerProvider._(
-    argument: (categoryId: categoryId, uncategorized: uncategorized),
+    argument: (categoryId: categoryId, uncategorized: uncategorized, tag: tag),
     from: this,
   );
 
@@ -83,11 +85,17 @@ final class DiaryControllerFamily extends $Family
 }
 
 abstract class _$DiaryController extends $AsyncNotifier<List<Diary>> {
-  late final _$args = ref.$arg as ({String? categoryId, bool uncategorized});
+  late final _$args =
+      ref.$arg as ({String? categoryId, bool uncategorized, String? tag});
   String? get categoryId => _$args.categoryId;
   bool get uncategorized => _$args.uncategorized;
+  String? get tag => _$args.tag;
 
-  FutureOr<List<Diary>> build({String? categoryId, bool uncategorized = false});
+  FutureOr<List<Diary>> build({
+    String? categoryId,
+    bool uncategorized = false,
+    String? tag,
+  });
   @$mustCallSuper
   @override
   WhenComplete runBuild() {
@@ -105,6 +113,7 @@ abstract class _$DiaryController extends $AsyncNotifier<List<Diary>> {
       () => build(
         categoryId: _$args.categoryId,
         uncategorized: _$args.uncategorized,
+        tag: _$args.tag,
       ),
     );
   }
@@ -162,7 +171,12 @@ final class GetDiaryProvider
     with $FutureModifier<Diary?>, $StreamProvider<Diary?> {
   GetDiaryProvider._({
     required GetDiaryFamily super.from,
-    required ({String? id, DiaryType? defaultType, String? defaultCategoryId})
+    required ({
+      String? id,
+      DiaryType? defaultType,
+      String? defaultCategoryId,
+      List<String>? defaultTags,
+    })
     super.argument,
   }) : super(
          retry: null,
@@ -195,12 +209,14 @@ final class GetDiaryProvider
               String? id,
               DiaryType? defaultType,
               String? defaultCategoryId,
+              List<String>? defaultTags,
             });
     return getDiary(
       ref,
       id: argument.id,
       defaultType: argument.defaultType,
       defaultCategoryId: argument.defaultCategoryId,
+      defaultTags: argument.defaultTags,
     );
   }
 
@@ -215,13 +231,18 @@ final class GetDiaryProvider
   }
 }
 
-String _$getDiaryHash() => r'a95947229c598ed69043beb842d37273495cbee3';
+String _$getDiaryHash() => r'620b86f2f6d09a39f7fd2a4959cc67f97eeb537c';
 
 final class GetDiaryFamily extends $Family
     with
         $FunctionalFamilyOverride<
           Stream<Diary?>,
-          ({String? id, DiaryType? defaultType, String? defaultCategoryId})
+          ({
+            String? id,
+            DiaryType? defaultType,
+            String? defaultCategoryId,
+            List<String>? defaultTags,
+          })
         > {
   GetDiaryFamily._()
     : super(
@@ -236,11 +257,13 @@ final class GetDiaryFamily extends $Family
     String? id,
     DiaryType? defaultType,
     String? defaultCategoryId,
+    List<String>? defaultTags,
   }) => GetDiaryProvider._(
     argument: (
       id: id,
       defaultType: defaultType,
       defaultCategoryId: defaultCategoryId,
+      defaultTags: defaultTags,
     ),
     from: this,
   );

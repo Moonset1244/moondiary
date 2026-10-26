@@ -63,10 +63,16 @@ class NewDiaryRoute extends MoodiaryRouteBase {
 
   final String? categoryId;
 
-  const NewDiaryRoute({this.categoryId}) : super(path);
+  final List<String>? tags;
+
+  const NewDiaryRoute({this.categoryId, this.tags}) : super(path);
 
   @override
-  Map<String, dynamic> get params => {'category_id': categoryId, 'edit': true};
+  Map<String, dynamic> get params => {
+    'category_id': categoryId,
+    'tags': tags,
+    'edit': true,
+  };
 }
 
 class ShareRoute extends MoodiaryRouteBase {

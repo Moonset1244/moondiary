@@ -23,18 +23,22 @@ class DiaryPage extends ConsumerStatefulWidget {
 
   final String? initialCategoryId;
 
+  final List<String>? initialTags;
+
   final bool startInEdit;
 
   const DiaryPage({
     super.key,
     this.diaryId,
     this.initialCategoryId,
+    this.initialTags,
     this.startInEdit = false,
   });
 
   factory DiaryPage.fromRoute(GoRouterState state) => DiaryPage(
     diaryId: state.params['diary_id'] as String?,
     initialCategoryId: state.params['category_id'] as String?,
+    initialTags: (state.params['tags'] as List?)?.cast<String>(),
     startInEdit: state.params['edit'] as bool? ?? false,
   );
 
@@ -113,6 +117,7 @@ class _DiaryPageState extends ConsumerState<DiaryPage>
     widget.diaryId,
     defaultType: .tiptap,
     defaultCategoryId: widget.initialCategoryId,
+    defaultTags: widget.initialTags,
   );
 
   @override
@@ -357,14 +362,13 @@ class _DiaryPageState extends ConsumerState<DiaryPage>
         builder: (context, ref, _) {
           final allTags = ref.watch(tagControllerProvider).value ?? [];
           final selected = current.tags;
-          final available = allTags
-              .where((t) => !selected.contains(t.name))
-              .toList()
-            ..sort((a, b) {
-              final ap = a.parentId == null ? a.name : '\u{FFFF}$a.name';
-              final bp = b.parentId == null ? b.name : '\u{FFFF}$b.name';
-              return ap.compareTo(bp);
-            });
+          final available =
+              allTags.where((t) => !selected.contains(t.name)).toList()
+                ..sort((a, b) {
+                  final ap = a.parentId == null ? a.name : '\u{FFFF}$a.name';
+                  final bp = b.parentId == null ? b.name : '\u{FFFF}$b.name';
+                  return ap.compareTo(bp);
+                });
           return Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -398,8 +402,7 @@ class _DiaryPageState extends ConsumerState<DiaryPage>
                           hintText: l10n.diary.tagNameHint,
                           isDense: true,
                         ),
-                        onSubmitted: (v) =>
-                            Navigator.of(context).pop(v.trim()),
+                        onSubmitted: (v) => Navigator.of(context).pop(v.trim()),
                       ),
                     ),
                     IconButton(
@@ -815,10 +818,7 @@ class _DiaryPageState extends ConsumerState<DiaryPage>
               child: CircularProgressIndicator(strokeWidth: 1.6),
             ),
             const SizedBox(width: 4),
-            Text(
-              context.l10n.diary.saving,
-              style: typo.bodySmall.outline,
-            ),
+            Text(context.l10n.diary.saving, style: typo.bodySmall.outline),
           ],
         );
       case 'saved':
@@ -902,6 +902,7 @@ class _DiaryPageState extends ConsumerState<DiaryPage>
       onOpenGraph: () => _editorController.withInputSuspended(
         () => DiaryGraphRoute(diaryId: diary.id).push<void>(context),
       ),
+      onDoubleTapToEdit: _enterEdit,
       statusBar: _mode == .edit ? _statusBar(diary) : null,
     );
   }

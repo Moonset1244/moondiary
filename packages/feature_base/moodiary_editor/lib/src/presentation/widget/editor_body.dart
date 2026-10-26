@@ -40,6 +40,7 @@ class EditorBody extends StatefulWidget {
   final VoidCallback? onManagePlaces;
   final VoidCallback? onClearPosition;
   final VoidCallback? onOpenGraph;
+  final VoidCallback? onDoubleTapToEdit;
 
   final Widget? statusBar;
 
@@ -72,6 +73,7 @@ class EditorBody extends StatefulWidget {
     this.onManagePlaces,
     this.onClearPosition,
     this.onOpenGraph,
+    this.onDoubleTapToEdit,
     this.statusBar,
   });
 
@@ -139,6 +141,7 @@ class _EditorBodyState extends State<EditorBody> {
         onManagePlaces: widget.onManagePlaces,
         onClearPosition: widget.onClearPosition,
         onOpenGraph: widget.onOpenGraph,
+        onDoubleTapToEdit: widget.onDoubleTapToEdit,
         statusBar: widget.statusBar,
       ),
     );

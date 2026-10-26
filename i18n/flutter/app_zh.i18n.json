@@ -168,5 +168,15 @@
   "fontNameFailed": "字体名称获取失败",
   "fontExists": "字体已存在",
   "routeErrorTitle": "页面不存在",
-  "routeErrorBackHome": "返回首页"
+  "routeErrorBackHome": "返回首页",
+  "diaryPrefsDefault": "默认值",
+  "defaultCategory": "默认日记本",
+  "defaultTags": "默认标签",
+  "defaultNone": "无",
+  "autoTitle": "自动标题",
+  "autoTitleNone": "关闭",
+  "autoTitleFirstSentence": "正文首句",
+  "autoTitleDateTime": "日期时间",
+  "autoTitleTemplate": "自定义模板",
+  "autoTitleTemplateHint": "模板可用 yyyy MM dd HH mm ss 和 first 占位符"
 }

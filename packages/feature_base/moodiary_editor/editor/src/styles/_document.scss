@@ -228,6 +228,11 @@
     box-decoration-break: clone;
   }
 
+  .ProseMirror .md-hashtag {
+    color: var(--app-primary);
+    font-weight: 500;
+  }
+
   .ProseMirror .suggestion {
     border-radius: 4px;
     background: var(--app-surface-container-high);

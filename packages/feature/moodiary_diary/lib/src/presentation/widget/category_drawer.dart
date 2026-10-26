@@ -5,6 +5,7 @@ import 'package:moodiary_di/moodiary_di.dart';
 import 'package:moodiary_diary/src/application/diary_filter.dart';
 import 'package:moodiary_diary/src/application/diary_selection.dart';
 import 'package:moodiary_i18n/moodiary_i18n.dart';
+import 'package:moodiary_models/moodiary_models.dart';
 import 'package:moodiary_router/moodiary_router.dart';
 import 'package:mui/mui.dart';
 
@@ -27,12 +28,51 @@ class _CategoryDrawerState extends ConsumerState<CategoryDrawer> {
     Navigator.of(context).pop();
   }
 
+  // 顶级标签及其子标签（缩进），与日记本同量级展示
+  List<Widget> _tagTiles(
+    Tag parent,
+    List<Tag> all,
+    Map<String, int> counts,
+    DiaryFilter filter,
+  ) {
+    final children = all.where((t) => t.parentId == parent.id).toList();
+    final colors = context.theme.colors;
+    return [
+      _Tile(
+        label: parent.name,
+        count: counts[parent.name],
+        selected: filter.tag == parent.name,
+        leading: Icon(
+          LucideIcons.tag,
+          size: 16,
+          color: colors.onSurfaceVariant,
+        ),
+        onTap: () => _pick(.tag(parent.name)),
+      ),
+      for (final child in children)
+        _Tile(
+          label: child.name,
+          count: counts[child.name],
+          selected: filter.tag == child.name,
+          leading: Icon(
+            LucideIcons.cornerDownRight,
+            size: 16,
+            color: colors.onSurfaceVariant,
+          ),
+          indent: 20,
+          onTap: () => _pick(.tag(child.name)),
+        ),
+    ];
+  }
+
   @override
   Widget build(BuildContext context) {
     final colors = context.theme.colors;
     final filter = ref.watch(homeDiaryFilterProvider);
     final categories = ref.watch(orderedCategoriesProvider).value ?? const [];
     final counts = ref.watch(categoryDiaryCountsProvider).value;
+    final tags = ref.watch(tagControllerProvider).value ?? const [];
+    final tagCounts = ref.watch(tagDiaryCountsProvider).value ?? const {};
     final total = counts?.total;
     final uncategorized = counts == null
         ? null
@@ -118,6 +158,23 @@ class _CategoryDrawerState extends ConsumerState<CategoryDrawer> {
                           syncing: pending.updateCategoryIds.contains(c.id),
                           onTap: () => _pick(.category(c.id)),
                         ),
+                      if (query.isEmpty && tags.isNotEmpty) ...[
+                        Padding(
+                          padding: const .fromLTRB(16, 14, 16, 6),
+                          child: Text(
+                            context.l10n.diary.tagSection,
+                            style: context
+                                .theme
+                                .typography
+                                .labelMedium
+                                .onSurfaceVariant,
+                          ),
+                        ),
+                        for (final parent in tags.where(
+                          (t) => t.parentId == null,
+                        ))
+                          ..._tagTiles(parent, tags, tagCounts, filter),
+                      ],
                       if (query.isEmpty)
                         for (var i = 0; i < pending.newCategoryIds.length; i++)
                           _PendingTile(
@@ -252,6 +309,7 @@ class _Tile extends StatelessWidget {
   final bool selected;
   final Widget leading;
   final bool syncing;
+  final double indent;
   final VoidCallback onTap;
 
   const _Tile({
@@ -260,6 +318,7 @@ class _Tile extends StatelessWidget {
     required this.selected,
     required this.leading,
     this.syncing = false,
+    this.indent = 0,
     required this.onTap,
   });
 
@@ -279,6 +338,7 @@ class _Tile extends StatelessWidget {
             padding: const .symmetric(horizontal: 14, vertical: 12),
             child: Row(
               children: [
+                if (indent > 0) SizedBox(width: indent),
                 leading,
                 const SizedBox(width: 12),
                 Expanded(

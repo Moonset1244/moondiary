@@ -444,6 +444,7 @@ class DiaryRepository {
   Future<List<Diary>> getDiaryByCategory({
     String? categoryId,
     bool uncategorized = false,
+    String? tag,
     int? offset,
     int? limit,
     DiarySort sort = .timeDesc,
@@ -455,6 +456,13 @@ class DiaryRepository {
     } else if (categoryId != null) {
       q.where((d) => d.categoryId.equals(categoryId));
     }
+    if (tag != null && tag.isNotEmpty) {
+      final tagName = tag;
+      final taggedIds = _db.selectOnly(_db.diaryTags)
+        ..addColumns([_db.diaryTags.diaryId])
+        ..where(_db.diaryTags.tag.equals(tagName));
+      q.where((d) => d.id.isInQuery(taggedIds));
+    }
     _orderBy(q, sort);
     if (limit != null) q.limit(limit, offset: offset);
     return _assemble(await q.get());
@@ -463,6 +471,7 @@ class DiaryRepository {
   Future<Map<DateTime, int>> diaryCountByMonth({
     String? categoryId,
     bool uncategorized = false,
+    String? tag,
     DiarySort sort = .timeDesc,
   }) async {
     assert(!(uncategorized && categoryId != null));
@@ -476,6 +485,13 @@ class DiaryRepository {
       q.where(_db.diaries.categoryId.isNull());
     } else if (categoryId != null) {
       q.where(_db.diaries.categoryId.equals(categoryId));
+    }
+    if (tag != null && tag.isNotEmpty) {
+      final tagName = tag;
+      final taggedIds = _db.selectOnly(_db.diaryTags)
+        ..addColumns([_db.diaryTags.diaryId])
+        ..where(_db.diaryTags.tag.equals(tagName));
+      q.where(_db.diaries.id.isInQuery(taggedIds));
     }
     final counts = <DateTime, int>{};
     for (final row in await q.get()) {
@@ -503,6 +519,29 @@ class DiaryRepository {
       if (id != null && id.isNotEmpty) byCategory[id] = n;
     }
     return (byCategory: byCategory, total: total);
+  }
+
+  /// 每个标签名对应的可见日记数（diary_tags 按名字关联，只统计未删除）。
+  Future<Map<String, int>> diaryCountByTag() async {
+    final tag = _db.diaryTags.tag;
+    final count = countAll();
+    final q = _db.selectOnly(_db.diaryTags)
+      ..addColumns([tag, count])
+      ..where(
+        _db.diaryTags.diaryId.isInQuery(
+          _db.selectOnly(_db.diaries)
+            ..addColumns([_db.diaries.id])
+            ..where(_db.diaries.show.equals(1)),
+        ),
+      )
+      ..groupBy([tag]);
+    final byTag = <String, int>{};
+    for (final row in await q.get()) {
+      final name = row.read(tag);
+      final n = row.read(count)!;
+      if (name != null && name.isNotEmpty) byTag[name] = n;
+    }
+    return byTag;
   }
 
   Future<int> countAllDiaries() async {

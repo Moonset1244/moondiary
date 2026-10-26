@@ -58,6 +58,7 @@ class DiaryController extends _$DiaryController with LoadMoreMixin<Diary> {
   FutureOr<List<Diary>> build({
     String? categoryId,
     bool uncategorized = false,
+    String? tag,
   }) async {
     final sub = _repository.diaryEvents.listen(_applyChange);
     ref.onDispose(sub.cancel);
@@ -73,6 +74,7 @@ class DiaryController extends _$DiaryController with LoadMoreMixin<Diary> {
     return _repository.getDiaryByCategory(
       categoryId: categoryId,
       uncategorized: uncategorized,
+      tag: tag,
       limit: limit,
       offset: offset,
       sort: _sort,
@@ -80,6 +82,7 @@ class DiaryController extends _$DiaryController with LoadMoreMixin<Diary> {
   }
 
   void _applyChange(DiaryEvent event) {
+    final tagFilter = tag;
     final list = state.value;
     if (list == null) {
       markMissedEvent();
@@ -93,7 +96,10 @@ class DiaryController extends _$DiaryController with LoadMoreMixin<Diary> {
             d.show &&
             (uncategorized
                 ? d.categoryId == null
-                : categoryId == null || d.categoryId == categoryId),
+                : categoryId == null || d.categoryId == categoryId) &&
+            (tagFilter == null ||
+                tagFilter.isEmpty ||
+                d.tags.contains(tagFilter)),
         compare: diarySortComparator(_sort),
         mayHaveMore: !noMore,
       ),
@@ -188,15 +194,20 @@ Stream<Diary?> getDiary(
   String? id,
   DiaryType? defaultType,
   String? defaultCategoryId,
+  List<String>? defaultTags,
 }) async* {
   if (id == null || id.isEmpty) {
     if (defaultType == null) {
       throw ArgumentError('getDiary: 新建空白日记必须显式提供 defaultType（id 为空时）');
     }
-    final empty = Diary.empty(type: defaultType);
-    yield defaultCategoryId == null
-        ? empty
-        : empty.copyWith(categoryId: defaultCategoryId);
+    var empty = Diary.empty(type: defaultType);
+    if (defaultCategoryId != null && defaultCategoryId.isNotEmpty) {
+      empty = empty.copyWith(categoryId: defaultCategoryId);
+    }
+    if (defaultTags != null && defaultTags.isNotEmpty) {
+      empty = empty.copyWith(tags: defaultTags);
+    }
+    yield empty;
     return;
   }
   final repository = getIt<DiaryRepository>();

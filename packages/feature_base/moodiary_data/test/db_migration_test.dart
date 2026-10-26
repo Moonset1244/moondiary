@@ -318,7 +318,9 @@ void main() {
     for (final (i, name) in ['工作', '生活', '工作', '心情'].indexed) {
       await old
           .into(old.diaryTags)
-          .insert(v3.DiaryTagsCompanion.insert(diaryId: 'd1', seq: i, tag: name));
+          .insert(
+            v3.DiaryTagsCompanion.insert(diaryId: 'd1', seq: i, tag: name),
+          );
     }
     await old.close();
 

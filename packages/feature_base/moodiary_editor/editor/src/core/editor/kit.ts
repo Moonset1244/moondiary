@@ -22,6 +22,7 @@ import { createMarkdownExtension, looksLikeMarkdown } from './markdown'
 import { docVersion, normalizeDoc, SCHEMA_VERSION } from './normalize'
 import { AttachmentNode } from './nodes/attachment'
 import { DiaryLink, dismissSuggestion } from './nodes/diary-link'
+import { Hashtag } from './nodes/hashtag'
 import { HorizontalRuleNode } from './nodes/horizontal-rule'
 import { AudioNode, ImageNode, VideoNode } from './nodes/media'
 import { clearSearch, SearchExtension } from './search'
@@ -231,6 +232,7 @@ export function createEditorKit(opts: EditorKitOptions): EditorKit {
   let stateFrame = 0
   let lastStateJson = ''
   let tapStart: { x: number; y: number; t: number } | null = null
+  let lastTapAt = 0
   // Flutter 表单抢焦点时 Chromium 会折叠选区，所以弹表单前先 holdSelection，回来时还原一次
   let held: { doc: PMNode; selection: Selection } | null = null
   let pointerDownAt = 0
@@ -380,11 +382,25 @@ export function createEditorKit(opts: EditorKitOptions): EditorKit {
   const onPointerUp = (view: EditorView, event: PointerEvent): boolean => {
     const start = tapStart
     tapStart = null
-    if (!start || !isPanelMode() || !view.editable) return false
+    if (!start) return false
     if (Math.hypot(event.clientX - start.x, event.clientY - start.y) > TAP_SLOP) return false
     if (Date.now() - start.t > TAP_MAX_MS) return false
     const target = event.target instanceof Element ? event.target : null
     if (!target || target.closest(NOT_TEXT_TAP)) return false
+
+    // 只读模式：双击正文进入编辑（自记）
+    if (!view.editable) {
+      const now = Date.now()
+      if (now - lastTapAt < 300) {
+        lastTapAt = 0
+        post('doubleTapToEdit')
+      } else {
+        lastTapAt = now
+      }
+      return false
+    }
+
+    if (!isPanelMode()) return false
     post('editorTap')
     return false
   }
@@ -441,6 +457,7 @@ export function createEditorKit(opts: EditorKitOptions): EditorKit {
     TaskList,
     TaskItem.configure({ nested: true }),
     DiaryLink,
+    Hashtag,
     CjkInputRules,
     SearchExtension,
     createMarkdownExtension(),

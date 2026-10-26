@@ -597,6 +597,33 @@ class Translations$app$zh {
 
 	/// zh: '模板可用 yyyy MM dd HH mm ss 和 first 占位符'
 	String get autoTitleTemplateHint => '模板可用 yyyy MM dd HH mm ss 和 first 占位符';
+
+	/// zh: '显示 AI 助手标签页'
+	String get showAssistantTab => '显示 AI 助手标签页';
+
+	/// zh: '元数据显示'
+	String get diaryPrefsMeta => '元数据显示';
+
+	/// zh: '显示天气'
+	String get showMetaWeather => '显示天气';
+
+	/// zh: '显示位置'
+	String get showMetaPosition => '显示位置';
+
+	/// zh: '显示日记本'
+	String get showMetaCategory => '显示日记本';
+
+	/// zh: '显示标签'
+	String get showMetaTags => '显示标签';
+
+	/// zh: '显示心情'
+	String get showMetaMood => '显示心情';
+
+	/// zh: '提取正文 #标签 为日记标签'
+	String get extractHashtags => '提取正文 #标签 为日记标签';
+
+	/// zh: '保存时把正文中的 #标签 移出正文、转为标签'
+	String get extractHashtagsSubtitle => '保存时把正文中的 #标签 移出正文、转为标签';
 }
 
 // Path: assistant

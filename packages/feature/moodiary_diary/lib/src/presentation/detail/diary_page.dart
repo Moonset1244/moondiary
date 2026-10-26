@@ -995,6 +995,13 @@ class _DiaryPageState extends ConsumerState<DiaryPage>
       'positionClearLabel': context.l10n.diary.positionClear,
       'tags': diary.tags,
       'deleteLabel': context.l10n.common.delete,
+      'showMeta': {
+        'weather': MoodiaryKVs.showMetaWeather.get() ?? true,
+        'position': MoodiaryKVs.showMetaPosition.get() ?? true,
+        'category': MoodiaryKVs.showMetaCategory.get() ?? true,
+        'tags': MoodiaryKVs.showMetaTags.get() ?? true,
+        'mood': MoodiaryKVs.showMetaMood.get() ?? true,
+      },
     });
   }
 

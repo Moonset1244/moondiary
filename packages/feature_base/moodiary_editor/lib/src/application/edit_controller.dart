@@ -5,6 +5,7 @@ import 'package:moodiary_editor/src/data/geo_repository.dart';
 import 'package:moodiary_editor/src/data/weather_repository.dart';
 import 'package:moodiary_models/moodiary_models.dart';
 import 'package:moodiary_storage/moodiary_storage.dart';
+import 'package:moodiary_utils/moodiary_utils.dart';
 import 'package:mui/mui.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -209,6 +210,7 @@ class EditController extends _$EditController {
     if (next.title.trim().isEmpty && autoTitle != null) {
       next = next.copyWith(title: autoTitle);
     }
+    next = _extractHashtags(next);
     if (_wasNewDraft && _isBlank(next)) {
       try {
         if (_persisted) {
@@ -302,5 +304,16 @@ class EditController extends _$EditController {
         .replaceAll('ss', p(t.second))
         .replaceAll('{first}', first)
         .replaceAll('{title}', d.title);
+  }
+
+  // 正文 #标签 提取为日记标签并从正文移除（设置 extractHashtags 开启时）
+  Diary _extractHashtags(Diary d) {
+    if (MoodiaryKVs.extractHashtags.get() != true) return d;
+    if (d.type != DiaryType.tiptap.value) return d;
+    final result = TiptapContent.stripHashtags(d.content);
+    if (result.tags.isEmpty) return d;
+    final mergedTags = {...d.tags, ...result.tags}.toList();
+    final newDiary = d.copyWith(content: result.content, tags: mergedTags);
+    return newDiary.copyWith(contentText: DiaryContent.of(newDiary).plainText);
   }
 }

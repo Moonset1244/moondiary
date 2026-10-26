@@ -368,6 +368,40 @@ class TiptapContent {
     return changed ? jsonEncode(doc) : content;
   }
 
+  /// 从正文 text 节点移除 #标签，返回新 content 与提取的标签名（去重）。
+  static ({String content, List<String> tags}) stripHashtags(String content) {
+    final doc = _tryDoc(content);
+    if (doc == null) return (content: content, tags: const []);
+    final regex = RegExp(
+      r'(?<![\p{L}\p{N}_#])#[\p{L}\p{N}_\u4e00-\u9fa5]+',
+      unicode: true,
+    );
+    final tags = <String>{};
+    var changed = false;
+    void walk(Object? node) {
+      if (node is! Map) return;
+      if (node['type'] == 'text') {
+        final text = node['text'];
+        if (text is String) {
+          for (final m in regex.allMatches(text)) {
+            tags.add(m.group(0)!.substring(1));
+          }
+          final stripped = text.replaceAll(regex, '');
+          if (stripped != text) {
+            node['text'] = stripped;
+            changed = true;
+          }
+        }
+      }
+      final children = node['content'];
+      if (children is List) children.forEach(walk);
+    }
+
+    walk(doc);
+    if (!changed) return (content: content, tags: const []);
+    return (content: jsonEncode(doc), tags: tags.toList());
+  }
+
   late final List<String> links = _links();
 
   List<String> _links() {

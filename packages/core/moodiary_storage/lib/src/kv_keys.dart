@@ -60,6 +60,20 @@ enum MoodiaryKVs<T extends Object> {
 
   autoTitleTemplate<String>(defaultValue: 'yyyy-MM-dd HH:mm:ss'),
 
+  showAssistantTab<bool>(defaultValue: false),
+
+  showMetaWeather<bool>(defaultValue: true),
+
+  showMetaPosition<bool>(defaultValue: true),
+
+  showMetaCategory<bool>(defaultValue: true),
+
+  showMetaTags<bool>(defaultValue: true),
+
+  showMetaMood<bool>(defaultValue: true),
+
+  extractHashtags<bool>(defaultValue: false),
+
   exportSettings<String>(defaultValue: ''),
 
   searchHistory<List<String>>(),

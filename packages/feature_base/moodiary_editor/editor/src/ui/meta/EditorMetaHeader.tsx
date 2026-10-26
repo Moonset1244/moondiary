@@ -80,8 +80,13 @@ export default function EditorMetaHeader({
 
   const timeText = editable ? meta.subText : `${meta.subText} · ${t('wordCount', { count: wordCount })}`
 
-  const hasFacts = editable || meta.weather || meta.position || meta.category
-  const hasTags = editable || meta.tags.length > 0
+  const show = meta.showMeta ?? {}
+  const showMood = editable || show.mood !== false
+  const hasWeather = editable || (show.weather !== false && !!meta.weather)
+  const hasPosition = editable || (show.position !== false && !!meta.position)
+  const hasCategory = editable || (show.category !== false && !!meta.category)
+  const hasFacts = hasWeather || hasPosition || hasCategory
+  const hasTags = editable || (show.tags !== false && meta.tags.length > 0)
 
   return (
     <div className="md-meta">
@@ -94,44 +99,52 @@ export default function EditorMetaHeader({
             {timeText}
           </MetaButton>
         </div>
-        <MetaButton
-          className="md-mood"
-          editable={editable}
-          ariaLabel={`${t('meta.mood')} ${currentMood.label}`}
-          style={{ '--mood': currentMood.color } as CSSProperties}
-          onPress={(anchor) => moodPop.current?.open(anchor)}
-        >
-          <MoodIcon />
-          <span>{currentMood.label}</span>
-        </MetaButton>
+        {showMood && (
+          <MetaButton
+            className="md-mood"
+            editable={editable}
+            ariaLabel={`${t('meta.mood')} ${currentMood.label}`}
+            style={{ '--mood': currentMood.color } as CSSProperties}
+            onPress={(anchor) => moodPop.current?.open(anchor)}
+          >
+            <MoodIcon />
+            <span>{currentMood.label}</span>
+          </MetaButton>
+        )}
       </div>
 
       {hasFacts && (
         <div className="md-meta__facts">
-          <Fact
-            editable={editable}
-            icon={glyph ? <span className="md-qi">{glyph}</span> : <Cloud />}
-            value={meta.weather?.text}
-            placeholder={t('meta.weather')}
-            onPress={(anchor) => weatherPop.current?.open(anchor)}
-          />
-          <Fact
-            editable={editable}
-            icon={<MapPin />}
-            value={meta.position}
-            placeholder={t('meta.place')}
-            onPress={(anchor) => {
-              placePop.current?.open(anchor)
-              post('locateForPlaces')
-            }}
-          />
-          <Fact
-            editable={editable}
-            icon={<Folder />}
-            value={meta.category}
-            placeholder={t('meta.category')}
-            onPress={() => post('pickCategory')}
-          />
+          {hasWeather && (
+            <Fact
+              editable={editable}
+              icon={glyph ? <span className="md-qi">{glyph}</span> : <Cloud />}
+              value={meta.weather?.text}
+              placeholder={t('meta.weather')}
+              onPress={(anchor) => weatherPop.current?.open(anchor)}
+            />
+          )}
+          {hasPosition && (
+            <Fact
+              editable={editable}
+              icon={<MapPin />}
+              value={meta.position}
+              placeholder={t('meta.place')}
+              onPress={(anchor) => {
+                placePop.current?.open(anchor)
+                post('locateForPlaces')
+              }}
+            />
+          )}
+          {hasCategory && (
+            <Fact
+              editable={editable}
+              icon={<Folder />}
+              value={meta.category}
+              placeholder={t('meta.category')}
+              onPress={() => post('pickCategory')}
+            />
+          )}
         </div>
       )}
 

@@ -53,6 +53,36 @@ class DiarySettingPage extends StatelessWidget {
               ],
             ),
             MSliverSettingGroup(
+              title: context.l10n.app.diaryPrefsMeta,
+              children: [
+                _KvSwitchTile(
+                  kv: .showMetaWeather,
+                  title: context.l10n.app.showMetaWeather,
+                ),
+                _KvSwitchTile(
+                  kv: .showMetaPosition,
+                  title: context.l10n.app.showMetaPosition,
+                ),
+                _KvSwitchTile(
+                  kv: .showMetaCategory,
+                  title: context.l10n.app.showMetaCategory,
+                ),
+                _KvSwitchTile(
+                  kv: .showMetaTags,
+                  title: context.l10n.app.showMetaTags,
+                ),
+                _KvSwitchTile(
+                  kv: .showMetaMood,
+                  title: context.l10n.app.showMetaMood,
+                ),
+                _KvSwitchTile(
+                  kv: .extractHashtags,
+                  title: context.l10n.app.extractHashtags,
+                  subtitle: context.l10n.app.extractHashtagsSubtitle,
+                ),
+              ],
+            ),
+            MSliverSettingGroup(
               title: context.l10n.app.diaryPrefsWeather,
               children: [
                 _GatedKvSwitchTile(

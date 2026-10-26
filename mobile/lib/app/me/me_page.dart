@@ -1,4 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:moodiary_assistant/moodiary_assistant.dart'
+    show AssistantSessionListPage;
 import 'package:moodiary_data/moodiary_data.dart';
 import 'package:moodiary_i18n/moodiary_i18n.dart';
 import 'package:moodiary_router/moodiary_router.dart';
@@ -478,6 +480,16 @@ class _ManageRows extends StatelessWidget {
             leading: lead(LucideIcons.fileOutput),
             trailing: chevron(),
             onTap: () => const ExportRoute().push(context),
+          ),
+          SettingListTile(
+            title: l10n.assistant.settingFunctionAIAssistant,
+            leading: lead(LucideIcons.astroid),
+            trailing: chevron(),
+            onTap: () => Navigator.of(context).push(
+              MaterialPageRoute<void>(
+                builder: (_) => const AssistantSessionListPage(),
+              ),
+            ),
           ),
           SettingListTile(
             isLast: true,

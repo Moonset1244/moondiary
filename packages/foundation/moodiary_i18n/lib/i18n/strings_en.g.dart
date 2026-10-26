@@ -235,6 +235,15 @@ class _Translations$app$en extends Translations$app$zh {
 	@override String get autoTitleDateTime => 'Date & time';
 	@override String get autoTitleTemplate => 'Custom template';
 	@override String get autoTitleTemplateHint => 'Template supports yyyy MM dd HH mm ss and the first placeholder';
+	@override String get showAssistantTab => 'Show AI assistant tab';
+	@override String get diaryPrefsMeta => 'Metadata display';
+	@override String get showMetaWeather => 'Show weather';
+	@override String get showMetaPosition => 'Show location';
+	@override String get showMetaCategory => 'Show notebook';
+	@override String get showMetaTags => 'Show tags';
+	@override String get showMetaMood => 'Show mood';
+	@override String get extractHashtags => 'Extract #hashtags as tags';
+	@override String get extractHashtagsSubtitle => 'On save, move #hashtags out of the body into tags';
 }
 
 // Path: assistant

@@ -178,5 +178,14 @@
   "autoTitleFirstSentence": "First sentence",
   "autoTitleDateTime": "Date & time",
   "autoTitleTemplate": "Custom template",
-  "autoTitleTemplateHint": "Template supports yyyy MM dd HH mm ss and the first placeholder"
+  "autoTitleTemplateHint": "Template supports yyyy MM dd HH mm ss and the first placeholder",
+  "showAssistantTab": "Show AI assistant tab",
+  "diaryPrefsMeta": "Metadata display",
+  "showMetaWeather": "Show weather",
+  "showMetaPosition": "Show location",
+  "showMetaCategory": "Show notebook",
+  "showMetaTags": "Show tags",
+  "showMetaMood": "Show mood",
+  "extractHashtags": "Extract #hashtags as tags",
+  "extractHashtagsSubtitle": "On save, move #hashtags out of the body into tags"
 }

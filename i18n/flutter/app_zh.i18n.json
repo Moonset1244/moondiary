@@ -178,5 +178,14 @@
   "autoTitleFirstSentence": "正文首句",
   "autoTitleDateTime": "日期时间",
   "autoTitleTemplate": "自定义模板",
-  "autoTitleTemplateHint": "模板可用 yyyy MM dd HH mm ss 和 first 占位符"
+  "autoTitleTemplateHint": "模板可用 yyyy MM dd HH mm ss 和 first 占位符",
+  "showAssistantTab": "显示 AI 助手标签页",
+  "diaryPrefsMeta": "元数据显示",
+  "showMetaWeather": "显示天气",
+  "showMetaPosition": "显示位置",
+  "showMetaCategory": "显示日记本",
+  "showMetaTags": "显示标签",
+  "showMetaMood": "显示心情",
+  "extractHashtags": "提取正文 #标签 为日记标签",
+  "extractHashtagsSubtitle": "保存时把正文中的 #标签 移出正文、转为标签"
 }

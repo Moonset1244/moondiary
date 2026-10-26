@@ -38,6 +38,13 @@ export interface EditorMeta {
   positionClearLabel: string
   tags: string[]
   deleteLabel: string
+  showMeta?: {
+    weather?: boolean
+    position?: boolean
+    category?: boolean
+    tags?: boolean
+    mood?: boolean
+  }
 }
 
 interface EditorLinkItem {

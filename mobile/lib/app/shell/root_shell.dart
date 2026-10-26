@@ -13,17 +13,21 @@ import 'package:mui/mui.dart';
 
 enum _ShellTab { diary, assistant, me }
 
-List<MNavDestination> _navDestinations(BuildContext context) {
+List<MNavDestination> _navDestinations(
+  BuildContext context,
+  bool showAssistant,
+) {
   final l10n = context.l10n;
   return [
     MNavDestination(
       icon: const Icon(LucideIcons.bookText),
       label: l10n.app.homeNavigatorDiary,
     ),
-    MNavDestination(
-      icon: const Icon(LucideIcons.astroid),
-      label: l10n.app.homeNavigatorAssistant,
-    ),
+    if (showAssistant)
+      MNavDestination(
+        icon: const Icon(LucideIcons.astroid),
+        label: l10n.app.homeNavigatorAssistant,
+      ),
     MNavDestination(
       icon: const Icon(LucideIcons.circleUser),
       label: l10n.app.homeNavigatorMe,
@@ -42,12 +46,6 @@ class _MobileRootShellState extends ConsumerState<MobileRootShell> {
   _ShellTab _tab = .diary;
 
   final _scaffoldKey = GlobalKey<ScaffoldState>();
-
-  late final List<Widget> _pages = [
-    DiaryHomePage(onOpenDrawer: () => _scaffoldKey.currentState?.openDrawer()),
-    const AssistantSessionListPage(),
-    const MePage(),
-  ];
 
   Future<void> _newDiary() async {
     final filteredCategory = _tab == .diary
@@ -85,20 +83,39 @@ class _MobileRootShellState extends ConsumerState<MobileRootShell> {
   @override
   Widget build(BuildContext context) {
     final selecting = ref.watch(diarySelectionProvider).isNotEmpty;
-    final drawerUsable = _tab == .diary && !selecting;
-    return Scaffold(
-      key: _scaffoldKey,
-      extendBody: true,
-      drawer: drawerUsable ? const CategoryDrawer() : null,
-      drawerEnableOpenDragGesture: drawerUsable,
-      body: MLazyIndexedStack(index: _tab.index, children: _pages),
-      bottomNavigationBar: MNavBar(
-        selectedIndex: _tab.index,
-        onDestinationSelected: (i) =>
-            setState(() => _tab = _ShellTab.values[i]),
-        destinations: _navDestinations(context),
-        action: _navAction(context),
-      ),
+    return ValueListenableBuilder(
+      valueListenable: MoodiaryKVs.showAssistantTab.getNotifier(),
+      builder: (context, showAssistant, _) {
+        final tabs = showAssistant
+            ? _ShellTab.values
+            : const [_ShellTab.diary, _ShellTab.me];
+        final effectiveTab = tabs.contains(_tab) ? _tab : _ShellTab.diary;
+        final pages = [
+          DiaryHomePage(
+            onOpenDrawer: () => _scaffoldKey.currentState?.openDrawer(),
+          ),
+          if (showAssistant) const AssistantSessionListPage(),
+          const MePage(),
+        ];
+        final drawerUsable = effectiveTab == .diary && !selecting;
+        return Scaffold(
+          key: _scaffoldKey,
+          extendBody: true,
+          drawer: drawerUsable ? const CategoryDrawer() : null,
+          drawerEnableOpenDragGesture: drawerUsable,
+          body: MLazyIndexedStack(
+            index: tabs.indexOf(effectiveTab),
+            children: pages,
+          ),
+          bottomNavigationBar: MNavBar(
+            selectedIndex: tabs.indexOf(effectiveTab),
+            onDestinationSelected: (i) =>
+                setState(() => _tab = tabs[i]),
+            destinations: _navDestinations(context, showAssistant),
+            action: _navAction(context),
+          ),
+        );
+      },
     );
   }
 }

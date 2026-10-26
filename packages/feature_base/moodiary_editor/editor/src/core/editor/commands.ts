@@ -3,6 +3,7 @@ import type { Node as PMNode } from '@tiptap/pm/model'
 import { NodeSelection, TextSelection } from '@tiptap/pm/state'
 import { post } from '@/core/bridge/post'
 import { sourceStore } from '@/core/state/source'
+import { formatMarkdown } from './format'
 import {
   caretAfterNode,
   caretIntoNewParagraph,
@@ -330,6 +331,13 @@ const HANDLERS: Record<string, Handler> = {
     clearSearch(c.editor)
     postSearch(c.editor)
   },
+  formatDocument: (c) => {
+    const md = c.editor.getMarkdown()
+    const formatted = formatMarkdown(md)
+    if (formatted === md) return
+    const parsed = c.editor.markdown?.parse(formatted)
+    if (parsed) c.editor.commands.setContent(parsed)
+  },
   toggleSourceMode: (c) => {
     const s = sourceStore.getState()
     if (!s.sourceMode) {
@@ -360,7 +368,7 @@ const READ_ONLY_SAFE = new Set([
 const LEAVE_BLOCK_FIRST = new Set(['insertTable', 'insertDiaryLink', 'setLink'])
 
 // 不 focus：键盘收着时点这些命令不该把键盘叫出来
-const NO_FOCUS = new Set([...READ_ONLY_SAFE, 'undo', 'redo', 'replace', 'replaceAll'])
+const NO_FOCUS = new Set([...READ_ONLY_SAFE, 'undo', 'redo', 'replace', 'replaceAll', 'formatDocument'])
 
 export function execCommand(ctx: ExecContext, command: string, args: ExecArgs = {}): boolean {
   const handler = Object.prototype.hasOwnProperty.call(HANDLERS, command) ? HANDLERS[command] : undefined

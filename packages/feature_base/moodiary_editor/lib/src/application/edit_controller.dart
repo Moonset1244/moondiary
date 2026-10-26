@@ -211,6 +211,7 @@ class EditController extends _$EditController {
       next = next.copyWith(title: autoTitle);
     }
     next = _extractHashtags(next);
+    next = _autoFormat(next);
     if (_wasNewDraft && _isBlank(next)) {
       try {
         if (_persisted) {
@@ -314,6 +315,16 @@ class EditController extends _$EditController {
     if (result.tags.isEmpty) return d;
     final mergedTags = {...d.tags, ...result.tags}.toList();
     final newDiary = d.copyWith(content: result.content, tags: mergedTags);
+    return newDiary.copyWith(contentText: DiaryContent.of(newDiary).plainText);
+  }
+
+  // 保存时自动格式化：中文与英文/数字之间加空格（设置 autoFormat 开启时）
+  Diary _autoFormat(Diary d) {
+    if (MoodiaryKVs.autoFormat.get() != true) return d;
+    if (d.type != DiaryType.tiptap.value) return d;
+    final formatted = TiptapContent.formatCjkSpace(d.content);
+    if (formatted == d.content) return d;
+    final newDiary = d.copyWith(content: formatted);
     return newDiary.copyWith(contentText: DiaryContent.of(newDiary).plainText);
   }
 }

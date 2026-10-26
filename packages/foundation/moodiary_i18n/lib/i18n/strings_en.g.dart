@@ -245,6 +245,8 @@ class _Translations$app$en extends Translations$app$zh {
 	@override String get extractHashtags => 'Extract #hashtags as tags';
 	@override String get extractHashtagsSubtitle => 'On save, move #hashtags out of the body into tags';
 	@override String get showHomeCalendar => 'Show calendar on home';
+	@override String get autoFormat => 'Auto format';
+	@override String get autoFormatSubtitle => 'Auto-space between CJK and Latin/digits on save; manual format in the editor format panel';
 }
 
 // Path: assistant
@@ -1569,4 +1571,5 @@ class _Translations$editor$toolbar$en extends Translations$editor$toolbar$zh {
 	@override String get openFailed => 'No app can open this file';
 	@override String get insertFailed => 'Could not insert';
 	@override String get sourceMode => 'Source';
+	@override String get formatDocument => 'Format';
 }

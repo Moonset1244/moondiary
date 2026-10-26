@@ -627,6 +627,12 @@ class Translations$app$zh {
 
 	/// zh: '主页显示日历'
 	String get showHomeCalendar => '主页显示日历';
+
+	/// zh: '自动格式化'
+	String get autoFormat => '自动格式化';
+
+	/// zh: '保存时自动在中文与英文/数字之间加空格；手动格式化见编辑器格式面板'
+	String get autoFormatSubtitle => '保存时自动在中文与英文/数字之间加空格；手动格式化见编辑器格式面板';
 }
 
 // Path: assistant
@@ -4347,4 +4353,7 @@ class Translations$editor$toolbar$zh {
 
 	/// zh: '源码模式'
 	String get sourceMode => '源码模式';
+
+	/// zh: '格式化'
+	String get formatDocument => '格式化';
 }

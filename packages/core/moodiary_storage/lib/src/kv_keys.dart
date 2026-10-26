@@ -76,6 +76,8 @@ enum MoodiaryKVs<T extends Object> {
 
   showHomeCalendar<bool>(defaultValue: true),
 
+  autoFormat<bool>(defaultValue: false),
+
   exportSettings<String>(defaultValue: ''),
 
   searchHistory<List<String>>(),

@@ -188,5 +188,7 @@
   "showMetaMood": "Show mood",
   "extractHashtags": "Extract #hashtags as tags",
   "extractHashtagsSubtitle": "On save, move #hashtags out of the body into tags",
-  "showHomeCalendar": "Show calendar on home"
+  "showHomeCalendar": "Show calendar on home",
+  "autoFormat": "Auto format",
+  "autoFormatSubtitle": "Auto-space between CJK and Latin/digits on save; manual format in the editor format panel"
 }

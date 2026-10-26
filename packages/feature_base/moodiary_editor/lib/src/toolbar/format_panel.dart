@@ -198,6 +198,15 @@ class FormatPanel extends StatelessWidget {
               ),
               Expanded(
                 child: _PanelButton(
+                  onTap: () => exec(.formatDocument),
+                  child: _IconLabel(
+                    icon: LucideIcons.wandSparkles,
+                    label: t.formatDocument,
+                  ),
+                ),
+              ),
+              Expanded(
+                child: _PanelButton(
                   onTap: () => exec(.clearFormatting),
                   child: _IconLabel(
                     icon: LucideIcons.removeFormatting,

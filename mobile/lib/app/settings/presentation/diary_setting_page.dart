@@ -84,6 +84,11 @@ class DiarySettingPage extends StatelessWidget {
                   kv: .showHomeCalendar,
                   title: context.l10n.app.showHomeCalendar,
                 ),
+                _KvSwitchTile(
+                  kv: .autoFormat,
+                  title: context.l10n.app.autoFormat,
+                  subtitle: context.l10n.app.autoFormatSubtitle,
+                ),
               ],
             ),
             MSliverSettingGroup(

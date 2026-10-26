@@ -188,5 +188,7 @@
   "showMetaMood": "显示心情",
   "extractHashtags": "提取正文 #标签 为日记标签",
   "extractHashtagsSubtitle": "保存时把正文中的 #标签 移出正文、转为标签",
-  "showHomeCalendar": "主页显示日历"
+  "showHomeCalendar": "主页显示日历",
+  "autoFormat": "自动格式化",
+  "autoFormatSubtitle": "保存时自动在中文与英文/数字之间加空格；手动格式化见编辑器格式面板"
 }

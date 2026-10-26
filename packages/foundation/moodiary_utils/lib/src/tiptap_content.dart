@@ -402,6 +402,38 @@ class TiptapContent {
     return (content: jsonEncode(doc), tags: tags.toList());
   }
 
+  /// 中文与英文/数字之间加空格（自动格式化，只处理 text 节点）。
+  static String formatCjkSpace(String content) {
+    final doc = _tryDoc(content);
+    if (doc == null) return content;
+    final regex = RegExp(
+      r'([\u4e00-\u9fff\u3400-\u4dbf])([A-Za-z0-9])|([A-Za-z0-9])([\u4e00-\u9fff\u3400-\u4dbf])',
+    );
+    var changed = false;
+    void walk(Object? node) {
+      if (node is! Map) return;
+      if (node['type'] == 'text') {
+        final text = node['text'];
+        if (text is String) {
+          final next = text.replaceAllMapped(regex, (m) {
+            final l = m.group(1) ?? m.group(3);
+            final r = m.group(2) ?? m.group(4);
+            return '$l $r';
+          });
+          if (next != text) {
+            node['text'] = next;
+            changed = true;
+          }
+        }
+      }
+      final children = node['content'];
+      if (children is List) children.forEach(walk);
+    }
+
+    walk(doc);
+    return changed ? jsonEncode(doc) : content;
+  }
+
   late final List<String> links = _links();
 
   List<String> _links() {

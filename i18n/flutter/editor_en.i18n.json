@@ -132,6 +132,7 @@
     "attachmentFailed": "Could not save the file",
     "openFailed": "No app can open this file",
     "insertFailed": "Could not insert",
-    "sourceMode": "Source"
+    "sourceMode": "Source",
+    "formatDocument": "Format"
   }
 }

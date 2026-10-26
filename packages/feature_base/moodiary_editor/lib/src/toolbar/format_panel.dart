@@ -193,6 +193,15 @@ class FormatPanel extends StatelessWidget {
                         label: t.codeBlock,
                       ),
                     ),
+                    PanelSegment(
+                      selected: false,
+                      onTap: () => exec(.toggleSourceMode),
+                      semanticLabel: t.sourceMode,
+                      child: _IconLabel(
+                        icon: LucideIcons.fileCode2,
+                        label: t.sourceMode,
+                      ),
+                    ),
                   ],
                 ),
               ),

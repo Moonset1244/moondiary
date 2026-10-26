@@ -1529,4 +1529,5 @@ class _Translations$editor$toolbar$en extends Translations$editor$toolbar$zh {
 	@override String get attachmentFailed => 'Could not save the file';
 	@override String get openFailed => 'No app can open this file';
 	@override String get insertFailed => 'Could not insert';
+	@override String get sourceMode => 'Source';
 }

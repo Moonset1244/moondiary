@@ -4227,4 +4227,7 @@ class Translations$editor$toolbar$zh {
 
 	/// zh: '插入失败'
 	String get insertFailed => '插入失败';
+
+	/// zh: '源码模式'
+	String get sourceMode => '源码模式';
 }

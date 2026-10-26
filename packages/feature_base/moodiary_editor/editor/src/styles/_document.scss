@@ -314,3 +314,22 @@
     outline-offset: 0;
   }
 }
+
+// 源码模式：与 .md-editor 同页宽/同基线，等宽字体直接编辑 Markdown 文本
+.md-source {
+  display: block;
+  width: 100%;
+  min-height: 60vh;
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  resize: none;
+  background: transparent;
+  color: var(--app-on-surface);
+  font-family: var(--app-font-mono);
+  font-size: var(--md-text-body);
+  line-height: 1.7;
+  tab-size: 2;
+  -webkit-text-size-adjust: 100%;
+}

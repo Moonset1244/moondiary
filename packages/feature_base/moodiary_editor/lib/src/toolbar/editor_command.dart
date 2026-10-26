@@ -56,4 +56,5 @@ enum EditorCommand {
   replace,
   replaceAll,
   clearSearch,
+  toggleSourceMode,
 }

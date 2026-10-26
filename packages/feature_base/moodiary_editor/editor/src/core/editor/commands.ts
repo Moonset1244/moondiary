@@ -2,6 +2,7 @@ import { type ChainedCommands, type Editor, type JSONContent } from '@tiptap/cor
 import type { Node as PMNode } from '@tiptap/pm/model'
 import { NodeSelection, TextSelection } from '@tiptap/pm/state'
 import { post } from '@/core/bridge/post'
+import { sourceStore } from '@/core/state/source'
 import {
   caretAfterNode,
   caretIntoNewParagraph,
@@ -329,6 +330,17 @@ const HANDLERS: Record<string, Handler> = {
     clearSearch(c.editor)
     postSearch(c.editor)
   },
+  toggleSourceMode: (c) => {
+    const s = sourceStore.getState()
+    if (!s.sourceMode) {
+      sourceStore.setState({ sourceMode: true, sourceText: c.editor.getMarkdown() })
+      c.editor.commands.blur()
+    } else {
+      const parsed = c.editor.markdown?.parse(s.sourceText)
+      if (parsed) c.editor.commands.setContent(parsed)
+      sourceStore.setState({ sourceMode: false })
+    }
+  },
 }
 
 const READ_ONLY_SAFE = new Set([
@@ -341,6 +353,7 @@ const READ_ONLY_SAFE = new Set([
   'searchNext',
   'searchPrev',
   'clearSearch',
+  'toggleSourceMode',
 ])
 
 // 选中块时先把光标挪到块后，否则块会被替换掉

@@ -131,6 +131,7 @@
     "addToToolbar": "加到工具栏",
     "attachmentFailed": "附件保存失败",
     "openFailed": "没有可以打开它的应用",
-    "insertFailed": "插入失败"
+    "insertFailed": "插入失败",
+    "sourceMode": "源码模式"
   }
 }

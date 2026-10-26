@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react'
 import type { Editor } from '@tiptap/core'
 import { EditorContent, useEditorState } from '@tiptap/react'
 import { useStore } from 'zustand'
+import { post } from '@/core/bridge/post'
 import { bindScrollViewport } from '@/core/bridge/scroll'
 import { countCharacters, plainTextOf } from '@/core/editor/plain-text'
 import { modeStore } from '@/core/state/editable'
@@ -19,6 +20,7 @@ export default function EditorViewport({ editor }: { editor: Editor }) {
   const sourceMode = useStore(sourceStore, (s) => s.sourceMode)
   const sourceText = useStore(sourceStore, (s) => s.sourceText)
   const viewport = useRef<HTMLDivElement>(null)
+  const sourceRef = useRef<HTMLTextAreaElement>(null)
   const onScroll = useScrollSpy(editor, viewport)
 
   const wordCount = useEditorState({
@@ -31,6 +33,13 @@ export default function EditorViewport({ editor }: { editor: Editor }) {
     return () => bindScrollViewport(null)
   }, [])
 
+  // 源码模式切换后自动聚焦 textarea，并把焦点上报为编辑器焦点（否则底部工具栏消失、无法切回）
+  useEffect(() => {
+    if (sourceMode && editable) {
+      sourceRef.current?.focus()
+    }
+  }, [sourceMode, editable])
+
   return (
     <div ref={viewport} className="md-viewport" onScroll={onScroll}>
       <div className="md-page">
@@ -38,6 +47,7 @@ export default function EditorViewport({ editor }: { editor: Editor }) {
         <TitleField editor={editor} editable={editable} />
         {sourceMode ? (
           <textarea
+            ref={sourceRef}
             className="md-source"
             value={sourceText}
             readOnly={!editable}
@@ -45,6 +55,8 @@ export default function EditorViewport({ editor }: { editor: Editor }) {
             autoCapitalize="off"
             autoCorrect="off"
             onChange={(e) => sourceStore.setState({ sourceText: e.target.value })}
+            onFocus={() => post('focusChange', 'editor')}
+            onBlur={() => post('focusChange', '')}
           />
         ) : (
           <EditorContent editor={editor} className="md-editor" />

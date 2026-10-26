@@ -26,6 +26,7 @@ enum ToolbarTool {
   record(LucideIcons.mic),
   audio(LucideIcons.fileAudio),
   attachment(LucideIcons.paperclip),
+  sourceMode(LucideIcons.fileCode, shownByDefault: true),
   clearFormat(LucideIcons.removeFormatting);
 
   final IconData icon;
@@ -59,6 +60,7 @@ enum ToolbarTool {
       record => t.record,
       audio => t.audio,
       attachment => t.attachment,
+      sourceMode => t.sourceMode,
       clearFormat => t.clearFormat,
     };
   }

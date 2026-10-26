@@ -251,6 +251,8 @@ class _EditorToolbarHostState extends State<EditorToolbarHost> {
         unawaited(widget.onInsertMedia(.audio));
       case .attachment:
         unawaited(widget.onInsertMedia(.attachment));
+      case .sourceMode:
+        _exec(.toggleSourceMode);
       case .clearFormat:
         _exec(.clearFormatting);
     }

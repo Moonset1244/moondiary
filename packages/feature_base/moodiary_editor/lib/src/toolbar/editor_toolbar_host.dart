@@ -89,8 +89,8 @@ class _EditorToolbarHostState extends State<EditorToolbarHost> {
     if (popover != _popover) setState(() => _popover = popover);
   }
 
-  bool get _editing =>
-      _c.focusTarget.value == .editor || _panel.type == .custom;
+  // 工具栏常显：编辑模式下始终显示，不再依赖焦点（仅只读模式或面板 custom 时隐藏）
+  bool get _editing => widget.editable || _panel.type == .custom;
 
   void _togglePanel(EditorPanel panel) {
     if (_panel.panel == panel) {

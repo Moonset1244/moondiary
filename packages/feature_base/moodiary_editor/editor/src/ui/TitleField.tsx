@@ -6,7 +6,15 @@ import { t } from '@/core/i18n'
 import { registerTitleFocus, titleStore } from '@/core/state/title'
 
 // 非受控：受控写法会打断 CJK 输入法组字
-export default function TitleField({ editor, editable }: { editor: Editor; editable: boolean }) {
+export default function TitleField({
+  editor,
+  editable,
+  autoTitlePreview,
+}: {
+  editor: Editor
+  editable: boolean
+  autoTitlePreview?: string | null
+}) {
   const hasTitle = useStore(titleStore, (s) => s.title.trim().length > 0)
   const el = useRef<HTMLTextAreaElement>(null)
   const composing = useRef(false)
@@ -69,7 +77,7 @@ export default function TitleField({ editor, editable }: { editor: Editor; edita
       style={visible ? undefined : { display: 'none' }}
       rows={1}
       readOnly={!editable}
-      placeholder={editable ? t('titlePlaceholder') : ''}
+      placeholder={editable ? (autoTitlePreview ?? t('titlePlaceholder')) : ''}
       enterKeyHint="next"
       onInput={onInput}
       onCompositionStart={() => {

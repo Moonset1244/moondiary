@@ -86,6 +86,11 @@ class _CategoryDrawerState extends ConsumerState<CategoryDrawer> {
         : categories
               .where((c) => c.categoryName.toLowerCase().contains(query))
               .toList();
+    final visibleTags = query.isEmpty
+        ? tags
+        : tags
+              .where((t) => t.name.toLowerCase().contains(query))
+              .toList();
 
     return Drawer(
       child: SafeArea(
@@ -158,7 +163,7 @@ class _CategoryDrawerState extends ConsumerState<CategoryDrawer> {
                           syncing: pending.updateCategoryIds.contains(c.id),
                           onTap: () => _pick(.category(c.id)),
                         ),
-                      if (query.isEmpty && tags.isNotEmpty) ...[
+                      if (visibleTags.isNotEmpty) ...[
                         Padding(
                           padding: const .fromLTRB(16, 14, 16, 6),
                           child: Text(
@@ -170,10 +175,10 @@ class _CategoryDrawerState extends ConsumerState<CategoryDrawer> {
                                 .onSurfaceVariant,
                           ),
                         ),
-                        for (final parent in tags.where(
+                        for (final parent in visibleTags.where(
                           (t) => t.parentId == null,
                         ))
-                          ..._tagTiles(parent, tags, tagCounts, filter),
+                          ..._tagTiles(parent, visibleTags, tagCounts, filter),
                       ],
                       if (query.isEmpty)
                         for (var i = 0; i < pending.newCategoryIds.length; i++)

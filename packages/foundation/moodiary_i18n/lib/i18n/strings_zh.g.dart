@@ -277,11 +277,11 @@ class Translations$app$zh {
 	/// zh: '需先配置和风天气'
 	String get qweatherRequired => '需先配置和风天气';
 
-	/// zh: '在此填入您自有的第三方服务凭证，启用 AI 助手、天气与地图等能力。所有凭证仅保存在本机。'
-	String get servicesIntro => '在此填入您自有的第三方服务凭证，启用 AI 助手、天气与地图等能力。所有凭证仅保存在本机。';
+	/// zh: '在此填入您自有的第三方服务凭证，启用 智能助手、天气与地图等能力。所有凭证仅保存在本机。'
+	String get servicesIntro => '在此填入您自有的第三方服务凭证，启用 智能助手、天气与地图等能力。所有凭证仅保存在本机。';
 
-	/// zh: 'AI 助手'
-	String get servicesAssistant => 'AI 助手';
+	/// zh: '智能助手'
+	String get servicesAssistant => '智能助手';
 
 	/// zh: '和风天气'
 	String get servicesQweather => '和风天气';
@@ -598,8 +598,8 @@ class Translations$app$zh {
 	/// zh: '模板可用 yyyy MM dd HH mm ss 和 first 占位符'
 	String get autoTitleTemplateHint => '模板可用 yyyy MM dd HH mm ss 和 first 占位符';
 
-	/// zh: '显示 AI 助手标签页'
-	String get showAssistantTab => '显示 AI 助手标签页';
+	/// zh: '显示 智能助手标签页'
+	String get showAssistantTab => '显示 智能助手标签页';
 
 	/// zh: '元数据显示'
 	String get diaryPrefsMeta => '元数据显示';
@@ -633,6 +633,12 @@ class Translations$app$zh {
 
 	/// zh: '保存时自动在中文与英文/数字之间加空格；手动格式化见编辑器格式面板'
 	String get autoFormatSubtitle => '保存时自动在中文与英文/数字之间加空格；手动格式化见编辑器格式面板';
+
+	/// zh: '回车软换行'
+	String get enterBreaks => '回车软换行';
+
+	/// zh: '开启：回车输入单个换行符（段内换行）；关闭：回车分段（空行分隔）'
+	String get enterBreaksSubtitle => '开启：回车输入单个换行符（段内换行）；关闭：回车分段（空行分隔）';
 }
 
 // Path: assistant
@@ -667,8 +673,8 @@ class Translations$assistant$zh {
 	/// zh: '请先在「模型供应商」中填写 API Key。'
 	String get needApiKey => '请先在「模型供应商」中填写 API Key。';
 
-	/// zh: 'AI 助手配置'
-	String get settingTitle => 'AI 助手配置';
+	/// zh: '智能助手配置'
+	String get settingTitle => '智能助手配置';
 
 	/// zh: '已切换到 {model}'
 	String modelSwitched({required Object model}) => '已切换到 ${model}';
@@ -1198,8 +1204,8 @@ class Translations$assistant$zh {
 	/// zh: 'Key 未配置'
 	String get summaryKeyUnset => 'Key 未配置';
 
-	/// zh: 'AI 助手配置'
-	String get summaryTitle => 'AI 助手配置';
+	/// zh: '智能助手配置'
+	String get summaryTitle => '智能助手配置';
 
 	/// zh: ' （出错：{error}）'
 	String streamError({required Object error}) => '\n（出错：${error}）';
@@ -1386,6 +1392,9 @@ class Translations$assistant$zh {
 
 	/// zh: '已删除'
 	String get toolDeleted => '已删除';
+
+	/// zh: '通用'
+	String get generalTitle => '通用';
 }
 
 // Path: common

@@ -7,6 +7,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:moodiary_i18n/moodiary_i18n.dart';
 import 'package:moodiary_native/moodiary_native.dart';
+import 'package:moodiary_storage/moodiary_storage.dart';
 import 'package:mui/mui.dart';
 
 import 'editor_page.dart';
@@ -547,6 +548,9 @@ class _MoodiaryEditorState extends State<MoodiaryEditor> {
     'editable': !widget.readOnly,
     'locale': LocaleSettings.currentLocale.languageCode,
     'theme': _themePayload(),
+    'enterBreaks': MoodiaryKVs.enterBreaks.get() == true,
+    'autoTitleMode': MoodiaryKVs.autoTitleMode.get() ?? 0,
+    'autoFormat': MoodiaryKVs.autoFormat.get() == true,
   };
 
   Future<void> _respond(String reqId, Object? value) => _run(

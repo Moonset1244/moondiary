@@ -91,6 +91,7 @@ List<LlmProviderPreset> parseModelsDevCatalog(String body) {
   final result = <LlmProviderPreset>[];
   root.forEach((id, value) {
     if (id is String && value is Map) {
+      if (!_providerAllowlist.contains(id.toLowerCase())) return;
       final preset = LlmProviderPreset.fromModelsDev(
         id,
         value.cast<String, dynamic>(),
@@ -98,6 +99,34 @@ List<LlmProviderPreset> parseModelsDevCatalog(String body) {
       if (preset != null) result.add(preset);
     }
   });
+  // 白名单若没匹配到（models.dev 改 id），退回全量，避免列表为空
+  if (result.isEmpty) {
+    root.forEach((id, value) {
+      if (id is String && value is Map) {
+        final preset = LlmProviderPreset.fromModelsDev(
+          id,
+          value.cast<String, dynamic>(),
+        );
+        if (preset != null) result.add(preset);
+      }
+    });
+  }
   result.sort((a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
   return result;
 }
+
+// 只保留主流提供商（国外常用 + 国内常用），过滤 models.dev 里国内用不上的小众服务
+const Set<String> _providerAllowlist = {
+  'openai',
+  'anthropic',
+  'google',
+  'openrouter',
+  'deepseek',
+  'zhipuai',
+  'moonshot',
+  'qwen',
+  'xai',
+  'mistral',
+  'groq',
+  'perplexity',
+};

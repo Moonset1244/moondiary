@@ -47,10 +47,6 @@ class GeoRepository {
   }
 
   Future<GeoResult> getGeo(BuildContext context, {LatLng? coords}) async {
-    final credentials = await qweatherCredentials();
-    if (credentials == null) {
-      return (name: null, coords: null, failure: GeoFailure.notConfigured);
-    }
     var at = coords;
     if (at == null) {
       final located = await currentCoordinates();
@@ -62,11 +58,49 @@ class GeoRepository {
     if (!context.mounted) {
       return (name: null, coords: null, failure: GeoFailure.lookupFailed);
     }
-    final name = await _reverseGeocode(context, at, credentials);
+    final credentials = await qweatherCredentials();
+    if (!context.mounted) {
+      return (name: null, coords: null, failure: GeoFailure.lookupFailed);
+    }
+    final name = credentials != null
+        ? await _reverseGeocode(context, at, credentials)
+        : await _nominatimReverse(at);
     if (name == null) {
       return (name: null, coords: null, failure: GeoFailure.lookupFailed);
     }
     return (name: name, coords: at, failure: null);
+  }
+
+  /// 免 key 兜底：OpenStreetMap Nominatim 逆地理编码（免费）。
+  Future<String?> _nominatimReverse(LatLng coords) async {
+    try {
+      final res = await _http.get(
+        'https://nominatim.openstreetmap.org/reverse',
+        query: {
+          'lat': '${coords.latitude}',
+          'lon': '${coords.longitude}',
+          'format': 'json',
+          'accept-language': 'zh',
+        },
+      );
+      final data = res.data;
+      if (data is! Map) return null;
+      final address = data['address'];
+      if (address is! Map) return null;
+      final city = address['city'] ?? address['district'] ?? address['county'];
+      final town =
+          address['town'] ?? address['village'] ?? address['suburb'];
+      final name = city is String && town is String
+          ? '$city $town'
+          : city is String
+          ? city
+          : town is String
+          ? town
+          : data['display_name'];
+      return name is String && name.isNotEmpty ? name : null;
+    } catch (_) {
+      return null;
+    }
   }
 
   Future<String?> _reverseGeocode(

@@ -24,6 +24,7 @@ class AssistantSettingPage extends StatelessWidget {
         padding: const .symmetric(horizontal: 8.0),
         child: CustomScrollView(
           slivers: [
+            const _GeneralSection(),
             const _ProviderSection(),
             const _PersonalSection(),
             const _ToolSection(),
@@ -31,6 +32,27 @@ class AssistantSettingPage extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class _GeneralSection extends StatelessWidget {
+  const _GeneralSection();
+
+  @override
+  Widget build(BuildContext context) {
+    return MSliverSettingGroup(
+      title: context.l10n.assistant.generalTitle,
+      children: [
+        ValueListenableBuilder(
+          valueListenable: MoodiaryKVs.showAssistantTab.getNotifier(),
+          builder: (context, value, _) => SettingSwitchListTile(
+            title: context.l10n.app.showAssistantTab,
+            value: value,
+            onChanged: (v) => MoodiaryKVs.showAssistantTab.set(v),
+          ),
+        ),
+      ],
     );
   }
 }

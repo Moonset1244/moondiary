@@ -2,7 +2,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:moodiary_data/moodiary_data.dart';
 import 'package:moodiary_i18n/moodiary_i18n.dart';
-import 'package:moodiary_mobile/app/settings/setting_routes.dart';
 import 'package:moodiary_models/moodiary_models.dart';
 import 'package:moodiary_router/moodiary_router.dart';
 import 'package:moodiary_storage/moodiary_storage.dart';
@@ -33,6 +32,11 @@ class DiarySettingPage extends StatelessWidget {
                 _KvSwitchTile(
                   kv: .showWordCount,
                   title: context.l10n.app.showWordCount,
+                ),
+                _KvSwitchTile(
+                  kv: .enterBreaks,
+                  title: context.l10n.app.enterBreaks,
+                  subtitle: context.l10n.app.enterBreaksSubtitle,
                 ),
                 SettingListTile(
                   title: context.l10n.editor.toolbar.settingsTitle,
@@ -94,12 +98,12 @@ class DiarySettingPage extends StatelessWidget {
             MSliverSettingGroup(
               title: context.l10n.app.diaryPrefsWeather,
               children: [
-                _GatedKvSwitchTile(
+                _KvSwitchTile(
                   kv: .autoWeather,
                   title: context.l10n.app.autoWeather,
                   subtitle: context.l10n.app.autoWeatherSubtitle,
                 ),
-                _GatedKvSwitchTile(
+                _KvSwitchTile(
                   kv: .autoPosition,
                   title: context.l10n.app.autoPosition,
                   subtitle: context.l10n.app.autoPositionSubtitle,
@@ -136,40 +140,6 @@ class _KvSwitchTile extends StatelessWidget {
           subtitle: subtitle,
           value: value,
           onChanged: (v) => kv.set(v),
-        );
-      },
-    );
-  }
-}
-
-class _GatedKvSwitchTile extends ConsumerWidget {
-  final MoodiaryKVs<bool> kv;
-  final String title;
-  final String subtitle;
-
-  const _GatedKvSwitchTile({
-    required this.kv,
-    required this.title,
-    required this.subtitle,
-  });
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final key = ref
-        .watch(secretKvProvider(MoodiarySecureKVs.qweatherKey))
-        .value;
-    return ValueListenableBuilder(
-      valueListenable: MoodiaryKVs.qweatherApiHost.getNotifierOr(''),
-      builder: (context, host, _) {
-        final ready = host.isNotEmpty && (key?.isNotEmpty ?? false);
-        if (ready) {
-          return _KvSwitchTile(kv: kv, title: title, subtitle: subtitle);
-        }
-        return SettingListTile(
-          title: title,
-          subtitle: context.l10n.app.qweatherRequired,
-          trailing: const Switch(value: false, onChanged: null),
-          onTap: () => const ServicesRoute().push(context),
         );
       },
     );

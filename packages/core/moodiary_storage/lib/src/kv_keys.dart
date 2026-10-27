@@ -78,6 +78,8 @@ enum MoodiaryKVs<T extends Object> {
 
   autoFormat<bool>(defaultValue: false),
 
+  enterBreaks<bool>(defaultValue: false),
+
   exportSettings<String>(defaultValue: ''),
 
   searchHistory<List<String>>(),

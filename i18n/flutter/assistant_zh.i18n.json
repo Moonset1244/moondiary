@@ -7,7 +7,7 @@
   "notConfiguredBanner": "尚未配置可用的模型供应商，点击前往配置。",
   "needProvider": "请先在「模型供应商」中添加并选择一个可用的供应商。",
   "needApiKey": "请先在「模型供应商」中填写 API Key。",
-  "settingTitle": "AI 助手配置",
+  "settingTitle": "智能助手配置",
   "modelSwitched": "已切换到 {model}",
   "providerEntryLoading": "加载中…",
   "providerEntryEmpty": "尚未添加供应商，点击去添加",
@@ -184,7 +184,7 @@
   "summaryNoProvider": "未配置模型供应商",
   "summaryKeySet": "Key 已配置",
   "summaryKeyUnset": "Key 未配置",
-  "summaryTitle": "AI 助手配置",
+  "summaryTitle": "智能助手配置",
   "streamError": "\n（出错：{error}）",
   "requestFailed": "（请求失败：{error}）",
   "modelProviderDefault": "默认",
@@ -246,5 +246,6 @@
   "toolTrashedCount": "{count} 篇已移入回收站",
   "toolBatchDiaries": "{count} 篇",
   "toolBatchItems": "{count} 项",
-  "toolDeleted": "已删除"
+  "toolDeleted": "已删除",
+  "generalTitle": "通用"
 }

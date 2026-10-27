@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:latlong2/latlong.dart';
 import 'package:moodiary_data/moodiary_data.dart';
 import 'package:moodiary_di/moodiary_di.dart';
@@ -246,6 +248,8 @@ class EditController extends _$EditController {
       if (ref.mounted) {
         state = .data(next);
       }
+      // 正文 #标签 同步到标签注册表（侧边栏可见）
+      unawaited(getIt<TagRepository>().ensureTags(next.tags));
       return .saved;
     } catch (_) {
       return .failed;
@@ -307,15 +311,19 @@ class EditController extends _$EditController {
         .replaceAll('{title}', d.title);
   }
 
-  // 正文 #标签 提取为日记标签并从正文移除（设置 extractHashtags 开启时）
+  // 正文 #标签 识别：始终提取加入 diary.tags（元数据）；extractHashtags 开启时才从正文移除
   Diary _extractHashtags(Diary d) {
-    if (MoodiaryKVs.extractHashtags.get() != true) return d;
     if (d.type != DiaryType.tiptap.value) return d;
     final result = TiptapContent.stripHashtags(d.content);
     if (result.tags.isEmpty) return d;
     final mergedTags = {...d.tags, ...result.tags}.toList();
-    final newDiary = d.copyWith(content: result.content, tags: mergedTags);
-    return newDiary.copyWith(contentText: DiaryContent.of(newDiary).plainText);
+    final removeFromBody = MoodiaryKVs.extractHashtags.get() == true;
+    final content = removeFromBody ? result.content : d.content;
+    var next = d.copyWith(content: content, tags: mergedTags);
+    if (removeFromBody) {
+      next = next.copyWith(contentText: DiaryContent.of(next).plainText);
+    }
+    return next;
   }
 
   // 保存时自动格式化：中文与英文/数字之间加空格（设置 autoFormat 开启时）

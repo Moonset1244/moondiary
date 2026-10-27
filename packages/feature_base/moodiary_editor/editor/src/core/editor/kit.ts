@@ -15,6 +15,7 @@ import StarterKit from '@tiptap/starter-kit'
 import { common, createLowlight } from 'lowlight'
 import { cancelChange, flushChange, scheduleChange } from '@/core/bridge/change'
 import { post } from '@/core/bridge/post'
+import { editPrefsStore } from '@/core/state/editable'
 import { leaveSelectedBlock, selectedBlock } from './block'
 import { execCommand, type ExecArgs } from './commands'
 import { CjkInputRules } from './input-rules'
@@ -478,8 +479,15 @@ export function createEditorKit(opts: EditorKitOptions): EditorKit {
         view.dispatch(view.state.tr.insertText(text).scrollIntoView())
         return true
       },
-      handleKeyDown: (view, event) =>
-        event.key === 'Enter' && !event.isComposing && leaveSelectedBlock(view),
+      handleKeyDown: (view, event) => {
+        if (event.key !== 'Enter' || event.isComposing) return false
+        if (leaveSelectedBlock(view)) return true
+        if (editPrefsStore.getState().enterBreaks) {
+          editor?.chain().setHardBreak().run()
+          return true
+        }
+        return false
+      },
       handlePaste,
       handleDrop: (_view, event, _slice, moved) => {
         if (moved || !event.dataTransfer?.files.length || !editor?.isEditable) return false

@@ -551,10 +551,6 @@ class _DiaryPageState extends ConsumerState<DiaryPage>
     final wantWeather =
         MoodiaryKVs.autoWeather.get() == true && _weatherUntouched;
     if (!wantPlace && !wantApi && !wantWeather) return;
-    final qweatherReady =
-        (wantApi || wantWeather) && await qweatherCredentials() != null;
-    if (!mounted) return;
-    if (!wantPlace && !qweatherReady) return;
     _autoFillTried = true;
     final notifier = ref.read(_provider.notifier);
     final located = await notifier.locate();
@@ -570,7 +566,7 @@ class _DiaryPageState extends ConsumerState<DiaryPage>
         changed = true;
       }
     }
-    if (wantApi && qweatherReady && !changed && _placeUntouched) {
+    if (wantApi && !changed && _placeUntouched) {
       final result = await notifier.fetchPosition(
         context,
         coords: fix,
@@ -579,7 +575,7 @@ class _DiaryPageState extends ConsumerState<DiaryPage>
       if (!mounted) return;
       changed = result.place != null && _placeUntouched;
     }
-    if (wantWeather && qweatherReady && _weatherUntouched) {
+    if (wantWeather && _weatherUntouched) {
       final result = await notifier.fetchWeather(
         context,
         coords: fix,

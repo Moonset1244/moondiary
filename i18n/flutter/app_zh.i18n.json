@@ -72,8 +72,8 @@
   "autoNearestPlace": "自动匹配常用地点",
   "autoNearestPlaceSubtitle": "新建日记时若在某个常用地点附近，就记为该地点而不是城市",
   "qweatherRequired": "需先配置和风天气",
-  "servicesIntro": "在此填入您自有的第三方服务凭证，启用 AI 助手、天气与地图等能力。所有凭证仅保存在本机。",
-  "servicesAssistant": "AI 助手",
+  "servicesIntro": "在此填入您自有的第三方服务凭证，启用 智能助手、天气与地图等能力。所有凭证仅保存在本机。",
+  "servicesAssistant": "智能助手",
   "servicesQweather": "和风天气",
   "servicesQweatherHostHint": "devapi.qweather.com 或自定义",
   "servicesMap": "地图",
@@ -179,7 +179,7 @@
   "autoTitleDateTime": "日期时间",
   "autoTitleTemplate": "自定义模板",
   "autoTitleTemplateHint": "模板可用 yyyy MM dd HH mm ss 和 first 占位符",
-  "showAssistantTab": "显示 AI 助手标签页",
+  "showAssistantTab": "显示 智能助手标签页",
   "diaryPrefsMeta": "元数据显示",
   "showMetaWeather": "显示天气",
   "showMetaPosition": "显示位置",
@@ -190,5 +190,7 @@
   "extractHashtagsSubtitle": "保存时把正文中的 #标签 移出正文、转为标签",
   "showHomeCalendar": "主页显示日历",
   "autoFormat": "自动格式化",
-  "autoFormatSubtitle": "保存时自动在中文与英文/数字之间加空格；手动格式化见编辑器格式面板"
+  "autoFormatSubtitle": "保存时自动在中文与英文/数字之间加空格；手动格式化见编辑器格式面板",
+  "enterBreaks": "回车软换行",
+  "enterBreaksSubtitle": "开启：回车输入单个换行符（段内换行）；关闭：回车分段（空行分隔）"
 }

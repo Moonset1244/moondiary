@@ -57,6 +57,17 @@ class TagRepository {
     return row == null ? null : _toTag(row);
   }
 
+  /// 确保标签名存在（不存在则创建），用于正文 #标签 同步到标签注册表。
+  Future<void> ensureTags(Iterable<String> names) async {
+    for (final name in names) {
+      if (name.isEmpty) continue;
+      final existing = await getTagByName(name);
+      if (existing == null) {
+        await insertATag(Tag.create(name: name));
+      }
+    }
+  }
+
   Future<void> insertATag(Tag tag, {bool fromSync = false}) async {
     await _db.transaction(() async {
       await _db.into(_db.tags).insertOnConflictUpdate(_toCompanion(tag));

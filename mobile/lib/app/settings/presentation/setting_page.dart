@@ -75,14 +75,6 @@ class _FeatureSection extends StatelessWidget {
           trailing: _chevron(context),
           onTap: () => _openSetting(context, const AssistantSettingRoute()),
         ),
-        ValueListenableBuilder(
-          valueListenable: MoodiaryKVs.showAssistantTab.getNotifier(),
-          builder: (context, value, _) => SettingSwitchListTile(
-            title: context.l10n.app.showAssistantTab,
-            value: value,
-            onChanged: (v) => MoodiaryKVs.showAssistantTab.set(v),
-          ),
-        ),
       ],
     );
   }

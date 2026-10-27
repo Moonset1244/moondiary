@@ -247,6 +247,8 @@ class _Translations$app$en extends Translations$app$zh {
 	@override String get showHomeCalendar => 'Show calendar on home';
 	@override String get autoFormat => 'Auto format';
 	@override String get autoFormatSubtitle => 'Auto-space between CJK and Latin/digits on save; manual format in the editor format panel';
+	@override String get enterBreaks => 'Enter as soft break';
+	@override String get enterBreaksSubtitle => 'On: Enter inserts a single line break; Off: Enter starts a new paragraph';
 }
 
 // Path: assistant
@@ -504,6 +506,7 @@ class _Translations$assistant$en extends Translations$assistant$zh {
 	@override String toolBatchDiaries({required Object count}) => '${count} entries';
 	@override String toolBatchItems({required Object count}) => '${count} items';
 	@override String get toolDeleted => 'Deleted';
+	@override String get generalTitle => 'General';
 }
 
 // Path: common
